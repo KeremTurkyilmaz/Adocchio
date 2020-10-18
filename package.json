@@ -15,9 +15,9 @@
   "dependencies": {
     "@vue/composition-api": "^1.0.0-beta.14",
     "core-js": "^3.6.5",
+    "facedetector": "^1.0.1",
     "vue": "^2.6.12",
-    "vue-router": "^3.4.5",
-    "vuex": "^3.5.1"
+    "vue-router": "^3.4.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.6",
