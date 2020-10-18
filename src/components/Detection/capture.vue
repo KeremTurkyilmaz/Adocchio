@@ -1,8 +1,11 @@
 <template>
   <div class="capture">
-    <video autoplay muted class="input overlay" ref="input"></video>
-    <canvas class="swap overlay" ref="swap"></canvas>
-    <video autoplay muted class="output overlay" ref="output"></video>
+    <video autoplay muted class="input" ref="input"></video>
+    <canvas class="canvas overlay" ref="canvas"></canvas>
+    <div class="controls">
+      <p @click.prevent="startCamera" :class="{ paused: paused }">Start</p>
+      <p @click.prevent="stopCamera" :class="{ paused: !paused }">Stop</p>
+    </div>
   </div>
 </template>
 
@@ -15,34 +18,39 @@ export default {
   data() {
     return {
       camera: null,
-      paused: false,
-      bus: new Vue()
+      paused: null
+      // bus: new Vue()
     }
   },
   mounted() {
-    // this.camera = new Camera({
-    //   ...this.$config,
-    //   detection: this.$config.detection,
-    //   centerFaces: this.$config.centerFaces,
-    //   input: {
-    //     el: this.$refs.input,
-    //     ...this.$config.input
-    //   },
-    //   swap: {
-    //     el: this.$refs.swap,
-    //     ...this.$config.swap
-    //   },
-    //   output: {
-    //     el: this.$refs.output,
-    //     ...this.$config.output
-    //   },
-    //   picture: this.$config.picture
-    // })
+    this.camera = new Camera({
+      ...this.$config,
+      detectFaces: this.$config.detectFaces, // Boolean
+      flip: this.$config.flip, // Boolean
+      detection: this.$config.detection, // Detection Dimension (w, h)
+      canvas: this.$refs.canvas, // Canvas Element
+      input: {
+        el: this.$refs.input, // Input Element
+        ...this.$config.input // Input Width, Input Height
+      }
+    })
+
+    this.paused = !this.$config.detectFaces // Boolean
+
     // this.camera.on('detected', (d) => {
     //   console.log(d)
     // })
   },
-  methods: {},
+  methods: {
+    startCamera() {
+      this.paused = false
+      this.camera.start()
+    },
+    stopCamera() {
+      this.paused = true
+      this.camera.stop()
+    }
+  },
   destroyed() {
     this.camera = null
   }
@@ -51,56 +59,37 @@ export default {
 
 <style lang="scss">
 .capture {
+  position: relative;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+  background-color: lightgray;
 }
 .overlay {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+	transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
 }
 .input {
   transform: scale(0);
 }
-.output {
-  display: none;
-}
-.swap {
-  transform: scale(1);
-}
-.picture-preview {
-  z-index: 110;
-}
-h3 {
-  font-size: 4rem;
-}
-.preview-counter {
+.controls {
   position: absolute;
-  bottom: 1rem;
-  background-color: #e6002d;
-  color: #ffffff;
-  padding: 0.5rem;
-  margin: 0 auto;
-}
-
-.target {
-  position: absolute;
-  z-index: 10;
-  height: 100%;
-  width: 100%;
+  left: 0;
+  bottom: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  svg {
-    height: 50%;
-    width: 50%;
-    fill: #e6002d;
-  }
-  &.active {
-    svg {
-      fill: #00ffff;
+  flex-direction: row;
+  z-index: 10;
+  p {
+    font-size: 4rem;
+    margin-right: 1rem;
+    color: white;
+    cursor: pointer;
+    &.paused {
+      color: gray;
     }
   }
 }
