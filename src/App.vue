@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <Camera />
+    <Capture />
   </div>
 </template>
 
 <script>
-import Camera from '@/components/Detection/camera'
+import Capture from '@/components/Detection/capture.vue'
 export default {
   name: 'App',
   components: {
-    Camera
+    Capture
   }
 }
 </script>

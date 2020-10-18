@@ -1,16 +1,10 @@
-import Vue from 'vue';
-import VueCompositionApi from '@vue/composition-api'
-import App from './App.vue';
-import router from './router';
-import store from './store';
+import Vue from 'vue'
+import App from './App.vue'
 
-import '@/assets/styles/main.scss';
+import '@/assets/styles/main.scss'
 
-Vue.config.productionTip = true;
-Vue.use(VueCompositionApi)
+Vue.config.productionTip = true
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app');
+	render: h => h(App)
+}).$mount('#app')
