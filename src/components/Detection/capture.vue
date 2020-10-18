@@ -88,6 +88,7 @@ export default {
 }
 
 .controls {
+	display: inline-block;
   position: absolute;
   top: 0;
   left: 0;
@@ -97,7 +98,9 @@ export default {
   flex-direction: row;
   z-index: 10;
   p {
-    font-size: 3rem;
+		display: inline-block;
+		font-size: 3rem;
+		line-height: 100%;
     margin-right: 1rem;
     color: white;
     cursor: pointer;
