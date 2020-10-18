@@ -47,11 +47,13 @@ export default class CameraTools extends EventEmitter {
 		// Resize canvas as input dimension
 		resize(this.canvas, this.inputW, this.inputH)
 
-		// Scale only the canvas element for display
+		// Scale CSS without changing the canvas element
 		resizeCSS(this.canvas, 0.4)
+		resizeCSS(this.input, 0)
 
-		// Resize input
-		resize(this.input, 0, 0)
+		if(this.detectFaces){
+			console.log("Detect Faces is enable")
+		}
 
 		// if (this.detectFaces) {
 		// 	console.log('Initializing buffer')

@@ -2,7 +2,7 @@ import { setupWorkerListeners, setupWorkerEmitters, normalize } from '@/utils'
 setupWorkerListeners(self)
 setupWorkerEmitters(self)
 
-import FaceDetector from 'facedetector'
+// import FaceDetector from 'facedetector'
 
 self.emit('ready', true)
 
@@ -41,9 +41,9 @@ self.emit('ready', true)
 // 	}
 // })
 
-self.on('init', d => {
-	this.faceDetector = new FaceDetector({
-		video: d
-	})
-	console.log(this.faceDetector)
-})
+// self.on('init', d => {
+// 	this.faceDetector = new FaceDetector({
+// 		video: d
+// 	})
+// 	console.log(this.faceDetector)
+// })

@@ -1,10 +1,22 @@
 <template>
   <div class="capture">
     <video autoplay muted class="input" ref="input"></video>
-    <canvas class="canvas overlay" ref="canvas"></canvas>
+    <canvas class="canvas" ref="canvas"></canvas>
     <div class="controls">
-      <p @click.prevent="startCamera" :class="{ paused: paused }">Start</p>
-      <p @click.prevent="stopCamera" :class="{ paused: !paused }">Stop</p>
+      <p
+        v-show="paused"
+        @click.prevent="startDetection"
+        :class="{ paused: paused }"
+      >
+        Start Detection
+      </p>
+      <p
+        v-show="!paused"
+        @click.prevent="stopDetection"
+        :class="{ paused: !paused }"
+      >
+        Stop Detection
+      </p>
     </div>
   </div>
 </template>
@@ -42,11 +54,11 @@ export default {
     // })
   },
   methods: {
-    startCamera() {
+    startDetection() {
       this.paused = false
       this.camera.start()
     },
-    stopCamera() {
+    stopDetection() {
       this.paused = true
       this.camera.stop()
     }
@@ -65,26 +77,27 @@ export default {
   overflow: hidden;
   background-color: lightgray;
 }
-.overlay {
+
+.canvas {
   position: absolute;
   top: 50%;
   left: 50%;
-	transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
 }
-.input {
-  transform: scale(0);
-}
+
 .controls {
   position: absolute;
+  top: 0;
   left: 0;
-  bottom: 0;
+  padding: $padding;
+  letter-spacing: -1px;
   display: flex;
   flex-direction: row;
   z-index: 10;
   p {
-    font-size: 4rem;
+    font-size: 3rem;
     margin-right: 1rem;
     color: white;
     cursor: pointer;
