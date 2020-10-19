@@ -1,6 +1,5 @@
 import { resize, resizeCSS } from '@/utils'
 import { EventEmitter } from 'events'
-// import ML from './ml'
 
 export default class CameraTools extends EventEmitter {
 	constructor(options = {}) {
