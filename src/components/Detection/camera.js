@@ -1,5 +1,6 @@
 import { resize, resizeCSS } from '@/utils'
 import { EventEmitter } from 'events'
+import FaceDetection from './detection.js'
 
 export default class CameraTools extends EventEmitter {
 	constructor(options = {}) {
@@ -48,6 +49,13 @@ export default class CameraTools extends EventEmitter {
 		resizeCSS(this.canvas, 1)
 		resizeCSS(this.input, 0)
 
+		if (this.detectFaces) {
+			console.log('Detection is enable')
+			this.faceDetection = new FaceDetection({
+				input: this.input
+			})
+		} else {
+			console.log("Detection isn't enable")
 		}
 		navigator.mediaDevices
 			.getUserMedia({
