@@ -31,9 +31,6 @@ export default class CameraTools extends EventEmitter {
 		this.detection = options.detection
 		this.paused = false
 
-		// Array of faces
-		this.faces = []
-
 		// Launch Setup and log all options
 		console.log('Initializing camera', options)
 		this.setup()
@@ -50,20 +47,7 @@ export default class CameraTools extends EventEmitter {
 		resizeCSS(this.canvas, 0.4)
 		resizeCSS(this.input, 0)
 
-		if(this.detectFaces){
-			console.log("Detect Faces is enable")
 		}
-
-		// if (this.detectFaces) {
-		// 	console.log('Initializing buffer')
-		// 	this.buffer = document.createElement('canvas')
-		// 	this.buffer.id = 'buffer'
-		// 	this.canvas.parentNode.insertBefore(this.buffer, this.canvas.nextSibling)
-		// 	resize(this.buffer, this.dw, this.dh)
-		// 	this.bufferCtx = this.buffer.getContext('2d')
-		// 	this.ML = new ML({ target: this.buffer })
-		// }
-
 		navigator.mediaDevices
 			.getUserMedia({
 				video: {
@@ -82,14 +66,6 @@ export default class CameraTools extends EventEmitter {
 
 		// We pass the mediastream to the input element
 		this.input.srcObject = stream
-		if (this.detectFaces) this.update()
-		// if (this.ML.ready) this.update()
-		// else {
-		// 	this.ML.on('ready', () => {
-		// 		console.log('face detection ready')
-		// 		this.update()
-		// 	})
-		// }
 	}
 
 	update() {
@@ -107,21 +83,6 @@ export default class CameraTools extends EventEmitter {
 
 			this.ctx.restore()
 
-			// if (this.detectFaces) {
-			// 	this.drawBuffer()
-			// 	this.ML.detect(this.buffer)
-			// 	this.faces = []
-			// 	this.ML.faces.forEach((f, i) => {
-			// 		const t = this.getOutputCoords(f)
-			// 		this.faces[i] = t
-			// 		if (this.options.drawDetection) this.drawDetection(t)
-			// 	})
-			// 	if (this.options.centerFaces && this.faces.length) {
-			// 		const face = max(this.faces, f => f.area)
-			// 		this.offsetY = lerp(this.offsetY, this.oc.y - face.y, 0.1)
-			// 	}
-			// 	if (this.ML.faces.length) this.emit('detected', this.ML.faces)
-			// }
 			requestAnimationFrame(() => this.update())
 		}
 	}
