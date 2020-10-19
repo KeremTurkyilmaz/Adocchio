@@ -75,6 +75,14 @@ export default class CameraTools extends EventEmitter {
 
 		// We pass the mediastream to the input element
 		this.input.srcObject = stream
+		if (this.detectFaces) {
+			if (this.faceDetection.ready) this.update()
+			else {
+				this.faceDetection.on('ready', () => {
+					this.update()
+				})
+			}
+		}
 	}
 
 	update() {
