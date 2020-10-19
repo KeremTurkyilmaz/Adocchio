@@ -41,10 +41,11 @@ export default class CameraTools extends EventEmitter {
 		this.ctx = this.canvas.getContext('2d')
 
 		// Resize canvas as input dimension
-		resize(this.canvas, this.inputW, this.inputH)
+		resize(this.canvas, this.detection.w, this.detection.h)
+		resize(this.input, this.detection.w, this.detection.h)
 
-		// Scale CSS without changing the canvas element
-		resizeCSS(this.canvas, 0.4)
+		// Scale the element CSS without changing the element dimension
+		resizeCSS(this.canvas, 1)
 		resizeCSS(this.input, 0)
 
 		}
