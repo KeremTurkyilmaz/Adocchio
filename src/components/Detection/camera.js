@@ -98,10 +98,32 @@ export default class CameraTools extends EventEmitter {
 			// Draw the input image into the canvas
 			this.ctx.drawImage(this.input, 0, 0, this.canvas.width, this.canvas.height)
 
+			// If detection is enable we execute the faceDetection
+			if (this.detectFaces) {
+				// Launch faceDetector.setOnFaceUpdatedCallback
+				this.faceDetection.detect()
+				this.faces = []
+				// For each face, draw its box
+				this.faceDetection.faces.forEach(face => {
+					this.drawFace(face)
+				})
+			}
+
 			this.ctx.restore()
 
 			requestAnimationFrame(() => this.update())
 		}
+	}
+
+	// Draw face bounds into ctx
+	drawFace(face) {
+		this.ctx.save()
+		this.ctx.lineWidth = '2'
+		this.ctx.strokeStyle = '#ffc400'
+		this.ctx.beginPath()
+		this.ctx.rect(face.x, face.y, face.w, face.h)
+		this.ctx.stroke()
+		this.ctx.restore()
 	}
 
 	stop() {
