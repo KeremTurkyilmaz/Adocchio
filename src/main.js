@@ -5,11 +5,11 @@ import './assets/styles/main.scss'
 Vue.config.productionTip = false
 
 Vue.prototype.$config = {
-	detectFaces: true,
+	detectFaces: false,
 	flip: true,
 	detection: {
-		w: 512,
-		h: 288
+		w: 384,
+		h: 216
 	},
 	input: {
 		w: 1920,
