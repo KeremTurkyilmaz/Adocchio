@@ -1,4 +1,4 @@
-import { resize, lerp, max, distance, random, resizeCSS } from '@/utils'
+import { resize, resizeCSS } from '@/utils'
 import { EventEmitter } from 'events'
 // import ML from './ml'
 
