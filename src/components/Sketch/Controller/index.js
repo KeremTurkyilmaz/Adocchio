@@ -11,6 +11,13 @@ export default class Controller {
 		this.ctx = this.canvas.getContext('2d')
 		// Retrive container bounds
 		this.bounds = this.calculateBounds()
+
+		// Coordinates
+		this.coordinates = {
+			x: this.bounds.center.x,
+			y: this.bounds.center.y
+		}
+
 		// Set canvas dimension
 		this.canvas.setAttribute('width', this.bounds.w)
 		this.canvas.setAttribute('height', this.bounds.h)
