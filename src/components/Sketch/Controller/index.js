@@ -3,6 +3,7 @@ export default class Controller {
 		console.log('Initialize Controller', options)
 		this.options = options
 		this.canvas = options.canvas
+		this.animate = options.animate
 	stop() {
 		this.animate = false
 		this.ctx.clearRect(0, 0, this.bounds.w, this.bounds.h)

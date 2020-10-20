@@ -10,6 +10,7 @@ export default {
   name: 'Sketch',
   mounted() {
     this.controller = new Controller({
+      animate: true,
       canvas: this.$refs.canvas
     })
   }
