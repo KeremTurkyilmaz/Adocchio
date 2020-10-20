@@ -9,7 +9,7 @@ module.exports = {
 	},
 	extends: ['prettier', 'plugin:vue/recommended'],
 	rules: {
-		'no-console': process.env.NODE_ENV === 'production' ? 'off' : 'warn',
+		'no-console': "off",
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'off' : 'warn',
 		quotes: ['warn', 'single', { allowTemplateLiterals: true }],
 		'linebreak-style': 'off',
@@ -27,6 +27,6 @@ module.exports = {
 				'max': 10,
 				'allowFirstLine': true
 			}
-		}]
+		}],
 	}
 }
