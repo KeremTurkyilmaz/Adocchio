@@ -56,7 +56,7 @@ export default {
     this.camera = new Camera({
       ...this.$config,
       detectFaces: this.$config.detectFaces, // Boolean
-      captureVideo: true,
+      captureVideo: this.$config.captureVideo,
       flip: this.$config.flip, // Boolean
       detection: this.$config.detection, // Detection Dimension (w, h)
       canvas: this.$refs.canvas, // Canvas Element
@@ -65,7 +65,7 @@ export default {
         ...this.$config.input // Input Width, Input Height
       }
     })
-
+    this.captureVideo = this.$config.captureVideo
     this.pausedDetection = !this.$config.detectFaces // Boolean
 
     // this.camera.on('detected', (d) => {

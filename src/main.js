@@ -6,6 +6,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.$config = {
 	detectFaces: false,
+	captureVideo: true,
 	flip: true,
 	detection: {
 		w: 384,
