@@ -56,7 +56,7 @@ export default class CameraTools extends EventEmitter {
 				input: this.input
 			})
 		} else {
-			console.log("Detection isn't enabled")
+			console.log('Detection isn\'t enabled')
 		}
 		navigator.mediaDevices
 			.getUserMedia({
@@ -135,6 +135,7 @@ export default class CameraTools extends EventEmitter {
 	start() {
 		// Start Detection
 		this.paused = false
+		console.log(this.faceDetection)
 		this.update()
 	}
 }
