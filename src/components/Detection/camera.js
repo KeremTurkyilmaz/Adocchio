@@ -49,13 +49,14 @@ export default class CameraTools extends EventEmitter {
 		resizeCSS(this.canvas, 1)
 		resizeCSS(this.input, 0)
 
+		// If deteciton is enabled, we initialize the FaceDetection class
 		if (this.detectFaces) {
-			console.log('Detection is enable')
+			console.log('Detection is enabled')
 			this.faceDetection = new FaceDetection({
 				input: this.input
 			})
 		} else {
-			console.log("Detection isn't enable")
+			console.log("Detection isn't enabled")
 		}
 		navigator.mediaDevices
 			.getUserMedia({
@@ -98,7 +99,7 @@ export default class CameraTools extends EventEmitter {
 			// Draw the input image into the canvas
 			this.ctx.drawImage(this.input, 0, 0, this.canvas.width, this.canvas.height)
 
-			// If detection is enable we execute the faceDetection
+			// If detection is enabled we execute the faceDetection
 			if (this.detectFaces) {
 				// Launch faceDetector.setOnFaceUpdatedCallback
 				this.faceDetection.detect()
