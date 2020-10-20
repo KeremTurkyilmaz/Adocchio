@@ -8,7 +8,6 @@ module.exports = {
 		parser: 'babel-eslint'
 	},
 	extends: ['prettier', 'plugin:vue/recommended'],
-	plugin: ['vue'],
 	rules: {
 		'no-console': process.env.NODE_ENV === 'production' ? 'off' : 'warn',
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'off' : 'warn',
@@ -21,6 +20,13 @@ module.exports = {
 		'no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
 		'vue/no-unused-components': ['warn', { ignoreWhenBindingPresent: true }],
 		'prefer-const': 'warn',
-		'spaced-comment': 'warn'
+		'spaced-comment': 'warn',
+		'vue/max-attributes-per-line': ['warn', {
+			'singleline': 10,
+			'multiline': {
+				'max': 10,
+				'allowFirstLine': false
+			}
+		}]
 	}
 }
