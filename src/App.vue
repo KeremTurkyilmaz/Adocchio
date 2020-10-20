@@ -1,15 +1,18 @@
 <template>
   <div id="app">
-    <Capture />
+    <!-- <Capture /> -->
+    <Sketch />
   </div>
 </template>
 
 <script>
 import Capture from '@/components/Detection/capture.vue'
+import Sketch from '@/components/Sketch/'
 export default {
   name: 'App',
   components: {
-    Capture
+    Capture,
+    Sketch
   }
 }
 </script>
