@@ -7,6 +7,11 @@ export default class Controller {
 	init() {
 		// Retrive container bounds
 		this.bounds = this.calculateBounds()
+		// Set canvas dimension
+		this.canvas.setAttribute('width', this.bounds.w)
+		this.canvas.setAttribute('height', this.bounds.h)
+		this.canvas.style.width = this.bounds.w + 'px'
+		this.canvas.style.height = this.bounds.h + 'px'
 	}
 	calculateBounds() {
 		const container = this.canvas.parentNode
