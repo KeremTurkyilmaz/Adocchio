@@ -9,8 +9,21 @@ body,
   height: 100%;
 }
 
-html, body {
+html,
+body {
   font-family: $fontFamily;
   background-color: $col-white;
   color: $col-dark;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .column {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
 }
