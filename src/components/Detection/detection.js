@@ -25,13 +25,12 @@ export default class FaceDetection extends EventEmitter {
 			// We notify the controller with an emit
 			this.modelLoaded()
 		} else {
-			console.log("Can't read input stream")
+			console.log('Can\'t read input stream')
 		}
 	}
 
 	modelLoaded() {
 		this.ready = true
-		this.emit('ready', true)
 	}
 
 	detect() {
