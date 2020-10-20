@@ -30,6 +30,7 @@
         >
           Stop Detection
         </p>
+        <p @click.prevent="pageReload">Reload</p>
       </div>
     </div>
     <div class="column">
@@ -90,6 +91,9 @@ export default {
       } else {
         this.camera.startDetection()
       }
+    },
+    pageReload() {
+      location.reload()
     }
   }
 }
