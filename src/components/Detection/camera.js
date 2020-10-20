@@ -27,6 +27,9 @@ export default class CameraTools extends EventEmitter {
 		// Flip camera option
 		this.flip = options.flip
 
+		// Check if capture is enabled
+		this.captureVideo = options.captureVideo
+
 		// Check if we need to detect faces
 		this.detectFaces = options.detectFaces
 		this.detection = options.detection
@@ -51,23 +54,30 @@ export default class CameraTools extends EventEmitter {
 
 		// If deteciton is enabled, we initialize the FaceDetection class
 		if (this.detectFaces) {
-			console.log('Detection is enabled')
-			this.faceDetection = new FaceDetection({
-				input: this.input
-			})
-		} else {
-			console.log('Detection isn\'t enabled')
+			this.initFaceDetection()
 		}
-		navigator.mediaDevices
-			.getUserMedia({
-				video: {
-					width: this.inputW,
-					height: this.inputH
-				}
-			})
-			.then(stream => {
-				this.getStream(stream)
-			})
+
+		// Check if capture is enabled, if it is, true get the user media
+		if (this.captureVideo) {
+			navigator.mediaDevices
+				.getUserMedia({
+					video: {
+						width: this.inputW,
+						height: this.inputH
+					}
+				})
+				.then(stream => {
+					this.getStream(stream)
+				})
+		}
+	}
+
+	// If deteciton is enabled, we initialize the FaceDetection class
+	initFaceDetection() {
+		console.log('Initialize FaceDetection')
+		this.faceDetection = new FaceDetection({
+			input: this.input
+		})
 	}
 
 	getStream(stream) {
@@ -76,18 +86,13 @@ export default class CameraTools extends EventEmitter {
 
 		// We pass the mediastream to the input element
 		this.input.srcObject = stream
-		if (this.detectFaces) {
-			if (this.faceDetection.ready) this.update()
-			else {
-				this.faceDetection.on('ready', () => {
-					this.update()
-				})
-			}
-		}
+
+		// If caputre video is enabled, call update method
+		if (this.captureVideo) this.update()
 	}
 
 	update() {
-		if (!this.paused) {
+		if (this.captureVideo) {
 			this.ctx.save()
 
 			// Flip the cancas if we want the right mirrow effect
@@ -127,15 +132,28 @@ export default class CameraTools extends EventEmitter {
 		this.ctx.restore()
 	}
 
-	stop() {
-		// Stop Detection
-		this.paused = true
+	stopCapture() {
+		// Stop Caputure
+		this.captureVideo = false
 	}
 
-	start() {
-		// Start Detection
-		this.paused = false
-		console.log(this.faceDetection)
+	startCapture() {
+		this.captureVideo = true
 		this.update()
+	}
+
+	stopDetection() {
+		// Don't detect faces
+		this.detectFaces = false
+		// Clear the detection
+		this.faceDetection = null
+	}
+
+	startDetection() {
+		// If the variable didn't exit, initialize the faceDection class
+		if (!this.faceDetection) {
+			this.initFaceDetection()
+			if (this.faceDetection.ready) this.detectFaces = true
+		}
 	}
 }

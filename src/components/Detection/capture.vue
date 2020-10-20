@@ -1,28 +1,45 @@
 <template>
-  <div class="capture">
-    <video autoplay muted class="input" ref="input"></video>
-    <canvas class="canvas" ref="canvas"></canvas>
-    <div class="controls">
-      <p
-        v-show="paused"
-        @click.prevent="startDetection"
-        :class="{ paused: paused }"
-      >
-        Start Detection
-      </p>
-      <p
-        v-show="!paused"
-        @click.prevent="stopDetection"
-        :class="{ paused: !paused }"
-      >
-        Stop Detection
-      </p>
+  <div class="capture row">
+    <div class="column">
+      <div class="controls">
+        <p
+          v-show="pausedVideo"
+          :class="{ paused: pausedVideo }"
+          @click.prevent="toggleCamera(true)"
+        >
+          Start Camera
+        </p>
+        <p
+          v-show="!pausedVideo"
+          :class="{ paused: !pausedVideo }"
+          @click.prevent="toggleCamera(false)"
+        >
+          Stop Camera
+        </p>
+        <p
+          v-show="pausedDetection"
+          :class="{ paused: pausedDetection }"
+          @click.prevent="toggleDetection(true)"
+        >
+          Start Detection
+        </p>
+        <p
+          v-show="!pausedDetection"
+          :class="{ paused: !pausedDetection }"
+          @click.prevent="toggleDetection(false)"
+        >
+          Stop Detection
+        </p>
+      </div>
+    </div>
+    <div class="column">
+      <video ref="input" autoplay muted class="input"></video>
+      <canvas ref="canvas" class="canvas"></canvas>
     </div>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
 import Camera from './camera.js'
 
 export default {
@@ -30,14 +47,15 @@ export default {
   data() {
     return {
       camera: null,
-      paused: null
-      // bus: new Vue()
+      pausedVideo: false,
+      pausedDetection: null
     }
   },
   mounted() {
     this.camera = new Camera({
       ...this.$config,
       detectFaces: this.$config.detectFaces, // Boolean
+      captureVideo: true,
       flip: this.$config.flip, // Boolean
       detection: this.$config.detection, // Detection Dimension (w, h)
       canvas: this.$refs.canvas, // Canvas Element
@@ -47,24 +65,32 @@ export default {
       }
     })
 
-    this.paused = !this.$config.detectFaces // Boolean
+    this.pausedDetection = !this.$config.detectFaces // Boolean
 
     // this.camera.on('detected', (d) => {
     //   console.log(d)
     // })
   },
-  methods: {
-    startDetection() {
-      this.paused = false
-      this.camera.start()
-    },
-    stopDetection() {
-      this.paused = true
-      this.camera.stop()
-    }
-  },
   destroyed() {
     this.camera = null
+  },
+  methods: {
+    toggleCamera() {
+      this.pausedVideo = !this.pausedVideo
+      if (this.pausedVideo) {
+        this.camera.stopCapture()
+      } else {
+        this.camera.startCapture()
+      }
+    },
+    toggleDetection() {
+      this.pausedDetection = !this.pausedDetection
+      if (this.pausedDetection) {
+        this.camera.stopDetection()
+      } else {
+        this.camera.startDetection()
+      }
+    }
   }
 }
 </script>
@@ -76,36 +102,33 @@ export default {
   height: 100%;
   overflow: hidden;
   background-color: lightgray;
+  padding: 0.2rem;
 }
 
-.canvas {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
+.row {
+  .column:last-child {
+    align-items: flex-end;
+  }
 }
 
 .controls {
-	display: inline-block;
-  position: absolute;
-  top: 0;
-  left: 0;
   padding: $padding;
   letter-spacing: -1px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   z-index: 10;
   p {
-		display: inline-block;
-		font-size: 3rem;
-		line-height: 100%;
+    display: inline-block;
+    font-size: 3rem;
+    line-height: 100%;
     margin-right: 1rem;
     color: white;
     cursor: pointer;
     &.paused {
       color: gray;
+      &:hover {
+        color: black;
+      }
     }
   }
 }
