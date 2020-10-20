@@ -13,6 +13,10 @@ export default {
       animate: true,
       canvas: this.$refs.canvas
     })
+
+    // Init the controller
+    this.controller.init()
+    this.controller.draw()
   }
 }
 </script>

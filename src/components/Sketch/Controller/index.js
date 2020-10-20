@@ -9,6 +9,7 @@ export default class Controller {
 	init() {
 		// Get canvas context
 		this.ctx = this.canvas.getContext('2d')
+
 		// Retrive container bounds
 		this.bounds = this.calculateBounds()
 
