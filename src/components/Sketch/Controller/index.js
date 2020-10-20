@@ -4,6 +4,8 @@ export default class Controller {
 		this.options = options
 		this.canvas = options.canvas
 		this.animate = options.animate
+	}
+
 	init() {
 		// Get canvas context
 		this.ctx = this.canvas.getContext('2d')
