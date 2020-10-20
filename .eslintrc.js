@@ -25,7 +25,7 @@ module.exports = {
 			'singleline': 10,
 			'multiline': {
 				'max': 10,
-				'allowFirstLine': false
+				'allowFirstLine': true
 			}
 		}]
 	}
