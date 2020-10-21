@@ -18,6 +18,9 @@ export const lerp = (start, end, amt) => {
 	return (1 - amt) * start + amt * end
 }
 
+// Conver angle to radians
+export const radians = angle => (angle * Math.PI) / 180.0;
+
 export const calculateGrid = (options = {}) => {
 
 	// Check props
