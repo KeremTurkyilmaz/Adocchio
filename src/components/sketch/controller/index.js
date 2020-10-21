@@ -1,9 +1,12 @@
+import S_Grid from './scene/S_Grid'
+
 export default class Controller {
 	constructor(options = {}) {
 		console.log('Initialize Controller', options)
 		this.options = options
 		this.canvas = options.canvas
 		this.animate = options.animate
+		this.currentScene = 0
 	}
 
 	init() {
@@ -24,14 +27,39 @@ export default class Controller {
 		this.canvas.setAttribute('height', this.bounds.h)
 		this.canvas.style.width = this.bounds.w + 'px'
 		this.canvas.style.height = this.bounds.h + 'px'
+
+		// Options object to be pass to the scene class
+		this.options = {
+			ctx: this.ctx,
+			bounds: this.bounds
+		}
+
+		// List of scenes
+		this.scenes = []
+
+		// Let's add some scene to scenes list
+		this.scenes.push(new S_Grid(this.options))
+
+		// Init scene
+		this.setScene()
+	}
+
+	setScene() {
+		console.log('Init Scene nr.' + this.currentScene)
+		this.scene = this.scenes[this.currentScene]
+		this.scene.init()
 	}
 
 	draw() {
 		if (this.animate) {
-			this.ctx.clearRect(0, 0, this.bounds.w, this.bounds.h)
-			this.ctx.strokeRect(this.bounds.center.x, this.bounds.center.y, 100, 100)
-			this.ctx.stroke()
+			this.scene.pre()
+			this.scene.update(this.coordinates)
+			this.scene.render()
+			this.scene.post()
 			requestAnimationFrame(() => this.draw())
+		} else {
+			this.scene.clear()
+			window.cancelAnimationFrame(this.draw)
 		}
 	}
 
