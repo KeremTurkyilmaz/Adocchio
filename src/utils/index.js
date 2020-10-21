@@ -33,9 +33,8 @@ export const calculateGrid = (options = {}) => {
 	const bounds = options.bounds || { w: window.innerWidth, h: window.innerHeight }
 
 	// Calculate maximum rows and columns
-	const cols = Math.floor(bounds.width / modulo)
-	const rows = Math.floor(bounds.height / modulo)
-
+	const cols = Math.floor(bounds.w / modulo)
+	const rows = Math.floor(bounds.h / modulo)
 
 	// Calculate the size of all rows and columns
 	const dim = {
@@ -44,8 +43,8 @@ export const calculateGrid = (options = {}) => {
 	}
 
 	// Calculate the remaining space
-	const offX = bounds.width - dim.x
-	const offY = bounds.height - dim.y
+	const offX = bounds.w - dim.x
+	const offY = bounds.h - dim.y
 
 	// Calcualte the padding between each column and row
 	const pad = {
