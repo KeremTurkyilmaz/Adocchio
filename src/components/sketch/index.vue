@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Controller from './Controller'
+import Controller from './controller'
 export default {
   name: 'Sketch',
   mounted() {
@@ -14,9 +14,9 @@ export default {
       canvas: this.$refs.canvas
     })
 
-    // Init the controller
-    this.controller.init()
-    this.controller.draw()
+		// Init the controller
+		this.controller.init();
+		this.controller.draw();
   }
 }
 </script>
