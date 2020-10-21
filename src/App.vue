@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Capture from '@/components/Detection/capture.vue'
-import Sketch from '@/components/Sketch/'
+import Capture from '@/components/detection/capture.vue'
+import Sketch from '@/components/sketch/'
 export default {
   name: 'App',
   components: {
