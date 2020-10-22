@@ -2,32 +2,16 @@
   <div class="capture row">
     <div class="column">
       <div class="controls">
-        <p
-          v-show="pausedVideo"
-          :class="{ paused: pausedVideo }"
-          @click.prevent="toggleCamera(true)"
-        >
+        <p v-show="pausedVideo" :class="{ paused: pausedVideo }" @click.prevent="toggleCamera(true)">
           Start Camera
         </p>
-        <p
-          v-show="!pausedVideo"
-          :class="{ paused: !pausedVideo }"
-          @click.prevent="toggleCamera(false)"
-        >
+        <p v-show="!pausedVideo" :class="{ paused: !pausedVideo }" @click.prevent="toggleCamera(false)">
           Stop Camera
         </p>
-        <p
-          v-show="pausedDetection"
-          :class="{ paused: pausedDetection }"
-          @click.prevent="toggleDetection(true)"
-        >
+        <p v-show="pausedDetection" :class="{ paused: pausedDetection }" @click.prevent="toggleDetection(true)">
           Start Detection
         </p>
-        <p
-          v-show="!pausedDetection"
-          :class="{ paused: !pausedDetection }"
-          @click.prevent="toggleDetection(false)"
-        >
+        <p v-show="!pausedDetection" :class="{ paused: !pausedDetection }" @click.prevent="toggleDetection(false)">
           Stop Detection
         </p>
         <p @click.prevent="pageReload">Reload</p>
@@ -41,37 +25,38 @@
 </template>
 
 <script>
+import Events from '@/plugins/events'
 import Camera from './camera.js'
 
 export default {
-  name: 'Capture',
-  data() {
-    return {
-      camera: null,
-      pausedVideo: false,
-      pausedDetection: null
-    }
-  },
-  mounted() {
-    this.camera = new Camera({
-      ...this.$config,
-      detectFaces: this.$config.detectFaces, // Boolean
-      captureVideo: this.$config.captureVideo,
-      flip: this.$config.flip, // Boolean
-      detection: this.$config.detection, // Detection Dimension (w, h)
-      canvas: this.$refs.canvas, // Canvas Element
-      input: {
-        el: this.$refs.input, // Input Element
-        ...this.$config.input // Input Width, Input Height
-      }
-    })
-    this.captureVideo = this.$config.captureVideo
-    this.pausedDetection = !this.$config.detectFaces // Boolean
-
-    this.camera.on('detected', (d) => {
-      console.log(d)
+	name: 'Capture',
+	data() {
+		return {
+			camera: null,
+			pausedVideo: false,
+			pausedDetection: null
+		}
+	},
+	mounted() {
+		this.camera = new Camera({
+			...this.$config,
+			detectFaces: this.$config.detectFaces, // Boolean
+			captureVideo: this.$config.captureVideo,
+			flip: this.$config.flip, // Boolean
+			detection: this.$config.detection, // Detection Dimension (w, h)
+			canvas: this.$refs.canvas, // Canvas Element
+			input: {
+				el: this.$refs.input, // Input Element
+				...this.$config.input // Input Width, Input Height
+			}
 		})
+		this.captureVideo = this.$config.captureVideo
+		this.pausedDetection = !this.$config.detectFaces // Boolean
 
+		this.camera.on('detected', d => {
+			if (!d) return
+			Events.$emit('coordinates', d)
+		})
   },
   destroyed() {
     this.camera = null
@@ -104,7 +89,6 @@ export default {
 .capture {
   position: relative;
   width: 100%;
-  height: 100%;
   overflow: hidden;
   background-color: lightgray;
   padding: 0.2rem;
