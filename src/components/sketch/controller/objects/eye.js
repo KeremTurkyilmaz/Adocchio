@@ -33,6 +33,11 @@ export default class Eye {
 		// Check if the eye is closed
 		this.isClosed = false
 
+		// Pos and Des
+		this.pos = { x: 0, y: 0 }
+		this.des = { x: 0, y: 0 }
+
+	
 		// Dummy method for close an eye
 		// let interval = random(3000, 20000)
 		// setInterval(() => {
