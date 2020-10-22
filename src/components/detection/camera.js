@@ -1,12 +1,9 @@
 import { resize, resizeCSS, map } from '@/utils'
-import { EventEmitter } from 'events'
 import FaceDetection from './detection.js'
+import Events from '@/plugins/events'
 
-export default class CameraTools extends EventEmitter {
+export default class Camera {
 	constructor(options = {}) {
-		// Call super to access the EventEmitter functions
-		super()
-
 		// Reference to options props
 		this.options = options
 
@@ -126,11 +123,13 @@ export default class CameraTools extends EventEmitter {
 						let cy = face.y + face.y / 2
 						cx = map(cx, this.canvas.width, 0, 0, window.innerWidth)
 						cy = map(cy, 0, this.canvas.height, 0, window.innerHeight)
-						this.emit('detected', {
+						Events.$emit('detected', {
 							x: cx,
 							y: cy
 						})
 					}
+				} else {
+					Events.$emit('lost-detection', null)
 				}
 			}
 
