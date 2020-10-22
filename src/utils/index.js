@@ -23,6 +23,11 @@ export const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+
+export function map(n, in_min, in_max, out_min, out_max) {
+    return (n - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
 // Conver angle to radians
 export const radians = angle => (angle * Math.PI) / 180.0;
 
