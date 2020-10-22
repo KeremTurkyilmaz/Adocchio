@@ -19,13 +19,19 @@ export default {
 		this.controller.init()
 		this.controller.draw()
 
+		// this.$refs.canvas.addEventListener('mousemove', e => {
+		// 	this.controller.updateCoordinates = {
+		// 		x: e.clientX,
+		// 		y: e.clientY
+		// 	}
+		// })
+
 		Events.$on('coordinates', coordinates => {
 			this.controller.updateCoordinates = {
 				x: coordinates.x,
 				y: coordinates.y
 			}
-    })
-    
+		})
 	}
 }
 </script>
