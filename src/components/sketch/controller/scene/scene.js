@@ -53,4 +53,5 @@ export default class Scene {
 		// Restore context sate
 		this.ctx.restore()
 	}
+
 }
