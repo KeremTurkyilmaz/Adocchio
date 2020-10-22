@@ -25,6 +25,11 @@ export default class Eye {
 		this.pupil = this.loadImage('sprites', `pupil.png`)
 		this.eyeClosed = this.loadImage('sprites', `closed.png`)
 
+		this.iris_radius = this.r * 0.7
+		this.pupil_radius = this.r * 0.4
+		this.iris_arc = Math.asin(this.iris_radius / this.r)
+		this.iris_r = this.r * Math.cos(this.iris_arc)
+
 		// Check if the eye is closed
 		this.isClosed = false
 
@@ -55,10 +60,6 @@ export default class Eye {
 	follow(coordinates) {
 		this.mouse_ang = Math.atan2(coordinates.y - this.center.y, coordinates.x - this.center.x)
 		this.mouse_rad = this.dPunti(this.center.x, this.center.y, coordinates.x, coordinates.y)
-		this.iris_radius = this.r * 0.7
-		this.pupil_radius = this.r * 0.4
-		this.iris_arc = Math.asin(this.iris_radius / this.r)
-		this.iris_r = this.r * Math.cos(this.iris_arc)
 		this.eye_ang = Math.atan(this.mouse_rad / this.iris_r) * 0.7
 		if (this.eye_ang > radians(90) - this.iris_arc) this.eye_ang = radians(90) - this.iris_arc
 	}
