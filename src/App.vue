@@ -21,8 +21,7 @@ export default {
 /deep/ .capture {
 	position: absolute;
 	width: 50%;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	top: 0;
+	right: 0;
 }
 </style>
