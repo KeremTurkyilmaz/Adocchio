@@ -1,4 +1,4 @@
-import { radians, resize, random } from '@/utils'
+import { radians, resize, lerp } from '@/utils'
 
 const debug = true
 
@@ -34,11 +34,11 @@ export default class Eye {
 		this.isClosed = false
 
 		// Dummy method for close an eye
-		let interval = random(3000, 20000)
-		setInterval(() => {
-			this.isClosed = !this.isClosed
-			interval = random(1000, 2000)
-		}, interval)
+		// let interval = random(3000, 20000)
+		// setInterval(() => {
+		// 	this.isClosed = !this.isClosed
+		// 	interval = random(1000, 2000)
+		// }, interval)
 	}
 
 	// Load image from assets folder
