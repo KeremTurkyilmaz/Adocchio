@@ -19,18 +19,19 @@ export default {
 		this.controller.init()
 		this.controller.draw()
 
-		// this.$refs.canvas.addEventListener('mousemove', e => {
-		// 	this.controller.updateCoordinates = {
-		// 		x: e.clientX,
-		// 		y: e.clientY
-		// 	}
-		// })
-
-		Events.$on('coordinates', coordinates => {
+		Events.$on('detected', data => {
 			this.controller.updateCoordinates = {
-				x: coordinates.x,
-				y: coordinates.y
+				x: data.x,
+				y: data.y
 			}
+		})
+
+		Events.$on('lost-detection', d => {
+			console.log('Lost Detection')
+			// this.controller.updateCoordinates = {
+			// 	x: coordinates.x,
+			// 	y: coordinates.y
+			// }
 		})
 	}
 }
