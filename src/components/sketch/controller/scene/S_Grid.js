@@ -12,7 +12,7 @@ export default class S_Grid extends Scene {
 
 	init() {
 		// Define eye radius
-		this.modulo = 100
+		this.modulo = 200
 
 		// Empty eyes list
 		this.eyes = []
