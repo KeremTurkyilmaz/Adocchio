@@ -53,11 +53,6 @@ export default {
 		})
 		this.captureVideo = this.$config.captureVideo
 		this.pausedDetection = !this.$config.detectFaces // Boolean
-
-		this.camera.on('detected', d => {
-			if (!d) return
-			Events.$emit('coordinates', d)
-		})
   },
   destroyed() {
     this.camera = null
