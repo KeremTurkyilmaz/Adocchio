@@ -5,26 +5,28 @@
 </template>
 
 <script>
+import Events from '@/plugins/events'
 import Controller from './controller'
 export default {
-  name: 'Sketch',
-  mounted() {
-    this.controller = new Controller({
-      animate: true,
-      canvas: this.$refs.canvas
-    })
+	name: 'Sketch',
+	mounted() {
+		this.controller = new Controller({
+			animate: true,
+			canvas: this.$refs.canvas
+		})
 
-    // Init the controller
-    this.controller.init()
-    this.controller.draw()
+		// Init the controller
+		this.controller.init()
+		this.controller.draw()
 
-    this.$refs.canvas.addEventListener('mousemove', (e) => {
-      this.controller.updateCoordinates = {
-        x: e.clientX,
-        y: e.clientY
-      }
+		Events.$on('coordinates', coordinates => {
+			this.controller.updateCoordinates = {
+				x: coordinates.x,
+				y: coordinates.y
+			}
     })
-  }
+    
+	}
 }
 </script>
 
