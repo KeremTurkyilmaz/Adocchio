@@ -48,6 +48,9 @@ export default class FaceDetection extends EventEmitter {
 				// Update faces array
 				this._faces = results
 			})
+			this.faceDetector.setOnFaceLostCallback(() => {
+				this._faces = []
+			})
 		} catch (e) {
 			// Log an error if the detection fails
 			console.error('Face detection failed:', e)
