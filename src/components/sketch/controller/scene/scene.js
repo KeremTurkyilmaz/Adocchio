@@ -4,6 +4,7 @@ export default class Scene {
 		this.ctx = options.ctx
 		this.bounds = options.bounds
 		this.frames = 0
+		this.eyes = []
 		this.coordinates = {
 			x: 0,
 			y: 0
