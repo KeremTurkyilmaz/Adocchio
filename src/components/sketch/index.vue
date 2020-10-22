@@ -14,9 +14,16 @@ export default {
       canvas: this.$refs.canvas
     })
 
-		// Init the controller
-		this.controller.init();
-		this.controller.draw();
+    // Init the controller
+    this.controller.init()
+    this.controller.draw()
+
+    this.$refs.canvas.addEventListener('mousemove', (e) => {
+      this.controller.updateCoordinates = {
+        x: e.clientX,
+        y: e.clientY
+      }
+    })
   }
 }
 </script>
@@ -24,7 +31,7 @@ export default {
 <style lang="scss" scoped>
 .sketch {
   width: 100%;
-  height: 100%;
+  height: 75%;
   overflow: hidden;
   canvas {
     width: 100%;
