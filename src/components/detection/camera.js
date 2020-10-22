@@ -124,7 +124,7 @@ export default class CameraTools extends EventEmitter {
 						const face = this.faces[0]
 						let cx = face.x + face.w / 2
 						let cy = face.y + face.y / 2
-						cx = map(cx, this.canvas.width, 0 , 0, window.innerWidth)
+						cx = map(cx, this.canvas.width, 0, 0, window.innerWidth)
 						cy = map(cy, 0, this.canvas.height, 0, window.innerHeight)
 						this.emit('detected', {
 							x: cx,
