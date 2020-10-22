@@ -68,9 +68,10 @@ export default {
     this.captureVideo = this.$config.captureVideo
     this.pausedDetection = !this.$config.detectFaces // Boolean
 
-    // this.camera.on('detected', (d) => {
-    //   console.log(d)
-    // })
+    this.camera.on('detected', (d) => {
+      console.log(d)
+		})
+
   },
   destroyed() {
     this.camera = null
