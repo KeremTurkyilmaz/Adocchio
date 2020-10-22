@@ -1,9 +1,7 @@
-import { EventEmitter } from 'events'
 const FaceDetector = require('facedetector')
 
-export default class FaceDetection extends EventEmitter {
+export default class FaceDetection {
 	constructor(options = {}) {
-		super()
 		this.input = options.input
 		this._faces = []
 		this.setup()
