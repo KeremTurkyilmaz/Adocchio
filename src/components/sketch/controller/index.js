@@ -78,6 +78,11 @@ export default class Controller {
 		}
 	}
 
+	set updateCoordinates(coordinates) {
+		if (!coordinates) return
+		this.coordinates = coordinates
+	}
+
 	stop() {
 		this.animate = false
 		this.ctx.clearRect(0, 0, this.bounds.w, this.bounds.h)
