@@ -45,6 +45,7 @@ export default {
 			flip: this.$config.flip, // Boolean
 			detection: this.$config.detection, // Detection Dimension (w, h)
 			canvas: this.$refs.canvas, // Canvas Element
+			interval: this.$config.interval,
 			input: {
 				el: this.$refs.input, // Input Element
 				...this.$config.input // Input Width, Input Height

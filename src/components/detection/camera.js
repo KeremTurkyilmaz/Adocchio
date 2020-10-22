@@ -13,6 +13,8 @@ export default class CameraTools extends EventEmitter {
 		// Reference to canvas
 		this.canvas = options.canvas
 
+		this.interval = options.interval
+
 		// Input element, width and height
 		this.input = options.input.el
 		this.inputW = options.input.w
@@ -118,7 +120,7 @@ export default class CameraTools extends EventEmitter {
 				})
 
 				if (this.faces.length) {
-					// if (this.frames % 2 == 0) {
+					if (this.frames % this.interval == 0) {
 						const face = this.faces[0]
 						let cx = face.x + face.w / 2
 						let cy = face.y + face.y / 2
@@ -128,7 +130,7 @@ export default class CameraTools extends EventEmitter {
 							x: cx,
 							y: cy
 						})
-					// }
+					}
 				}
 			}
 

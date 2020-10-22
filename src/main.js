@@ -8,6 +8,7 @@ Vue.prototype.$config = {
 	detectFaces: false,
 	captureVideo: true,
 	flip: true,
+	interval: 1,
 	detection: {
 		w: 384,
 		h: 216
