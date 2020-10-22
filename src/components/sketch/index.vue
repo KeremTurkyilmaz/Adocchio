@@ -30,12 +30,12 @@ export default {
 
 <style lang="scss" scoped>
 .sketch {
-  width: 100%;
-  height: 75%;
-  overflow: hidden;
-  canvas {
-    width: 100%;
-    height: 100%;
-  }
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	canvas {
+		width: 100%;
+		height: 100%;
+	}
 }
 </style>
