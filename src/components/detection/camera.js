@@ -1,4 +1,4 @@
-import { resize, resizeCSS } from '@/utils'
+import { resize, resizeCSS, map } from '@/utils'
 import { EventEmitter } from 'events'
 import FaceDetection from './detection.js'
 
@@ -118,13 +118,17 @@ export default class CameraTools extends EventEmitter {
 				})
 
 				if (this.faces.length) {
-					if (this.frames % 8 == 0) {
+					// if (this.frames % 2 == 0) {
 						const face = this.faces[0]
+						let cx = face.x + face.w / 2
+						let cy = face.y + face.y / 2
+						cx = map(cx, 0, this.canvas.width, 0, window.innerWidth)
+						cy = map(cy, 0, this.canvas.height, 0, window.innerHeight)
 						this.emit('detected', {
-							x: face.x,
-							y: face.y
+							x: cx,
+							y: cy
 						})
-					}
+					// }
 				}
 			}
 
