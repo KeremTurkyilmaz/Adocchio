@@ -44,6 +44,8 @@ export default class CameraTools extends EventEmitter {
 		// Get canvas context
 		this.ctx = this.canvas.getContext('2d')
 
+		this.frames = 0
+
 		// Resize canvas as input dimension
 		resize(this.canvas, this.detection.w, this.detection.h)
 		resize(this.input, this.detection.w, this.detection.h)
@@ -110,10 +112,24 @@ export default class CameraTools extends EventEmitter {
 				this.faceDetection.detect()
 				this.faces = []
 				// For each face, draw its box
-				this.faceDetection.faces.forEach(face => {
+				this.faceDetection.faces.forEach((face, index) => {
+					this.faces[index] = face
 					this.drawFace(face)
 				})
+
+				if (this.faces.length) {
+					if (this.frames % 8 == 0) {
+						const face = this.faces[0]
+						this.emit('detected', {
+							x: face.x,
+							y: face.y
+						})
+					}
+				}
 			}
+
+			// Increment Frame
+			this.frames++
 
 			this.ctx.restore()
 
