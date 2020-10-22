@@ -88,38 +88,38 @@ export default {
 
 <style lang="scss">
 .capture {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  background-color: lightgray;
-  padding: 0.2rem;
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+	background-color: lightgray;
+	padding: 0.2rem;
 }
 
 .row {
-  .column:last-child {
-    align-items: flex-end;
-  }
+	.column:last-child {
+		align-items: flex-end;
+	}
 }
 
 .controls {
-  padding: $padding;
-  letter-spacing: -1px;
-  display: flex;
-  flex-direction: column;
-  z-index: 10;
-  p {
-    display: inline-block;
-    font-size: 3rem;
-    line-height: 100%;
-    margin-right: 1rem;
-    color: white;
-    cursor: pointer;
-    &.paused {
-      color: gray;
-      &:hover {
-        color: black;
-      }
-    }
-  }
+	padding: $padding;
+	letter-spacing: -1px;
+	display: flex;
+	flex-direction: column;
+	z-index: 10;
+	p {
+		display: inline-block;
+		font-size: 3rem;
+		line-height: 100%;
+		margin-right: 1rem;
+		color: white;
+		cursor: pointer;
+		&.paused {
+			color: gray;
+			&:hover {
+				color: black;
+			}
+		}
+	}
 }
 </style>
