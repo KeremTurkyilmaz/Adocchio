@@ -20,27 +20,20 @@ export default class Scene {
 		// Save context state
 		this.ctx.save()
 	}
-	update(coordinates) {
+
+	update() {
 		if (!this.eyes) return
+		if (this.frameCount % 120 == 0) console.log(this.mode)
 
-		// Increment frames
-		this.frames++
-
-		// If the coordinates are the same, return
-		// Otherwise continue and update the coordinates
-		if (this.coordinates === coordinates) return
-		this.coordinates = coordinates
-
-		// Update eyes, follow the coordinates
-		this.eyes.forEach(eye => {
-			eye.follow(this.coordinates)
-		})
+		// Increment frameCount
+		this.frameCount++
 	}
 	render() {
 		if (!this.eyes) return
 
 		// Draw eyes
 		this.eyes.forEach(eye => {
+			eye.follow(this.coordinates)
 			eye.render(this.ctx)
 		})
 
@@ -55,4 +48,10 @@ export default class Scene {
 		this.ctx.restore()
 	}
 
+	set updateCoordinates(coord) {
+		// If the coordinates are the same, return
+		// Otherwise continue and update the coordinates
+		if (this.coordinates === coord) return
+		this.coordinates = coord
+	}
 }

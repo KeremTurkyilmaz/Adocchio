@@ -16,12 +16,6 @@ export default class Controller {
 		// Retrive container bounds
 		this.bounds = this.calculateBounds()
 
-		// Coordinates
-		this.coordinates = {
-			x: this.bounds.center.x,
-			y: this.bounds.center.y
-		}
-
 		// Set canvas dimension
 		this.canvas.setAttribute('width', this.bounds.w)
 		this.canvas.setAttribute('height', this.bounds.h)
@@ -53,7 +47,7 @@ export default class Controller {
 	draw() {
 		if (this.animate) {
 			this.scene.pre()
-			this.scene.update(this.coordinates)
+			this.scene.update()
 			this.scene.render()
 			this.scene.post()
 			requestAnimationFrame(() => this.draw())
@@ -76,11 +70,6 @@ export default class Controller {
 				y: containerSize.height / 2
 			}
 		}
-	}
-
-	set updateCoordinates(coordinates) {
-		if (!coordinates) return
-		this.coordinates = coordinates
 	}
 
 	stop() {

@@ -19,21 +19,16 @@ export default {
 		this.controller.init()
 		this.controller.draw()
 
-		Events.$on('detected', data => {
-			this.controller.updateCoordinates = {
-				x: data.x,
-				y: data.y
-			}
-		})
+    Events.$on('detected', (data) => {
+      this.controller.scene.updateCoordinates = {
+        x: data.x,
+        y: data.y
+      }
+    })
 
-		Events.$on('lost-detection', d => {
-			console.log('Lost Detection')
-			// this.controller.updateCoordinates = {
-			// 	x: coordinates.x,
-			// 	y: coordinates.y
-			// }
-		})
-	}
+    Events.$on('lost-detection', (d) => {
+    })
+  }
 }
 </script>
 
