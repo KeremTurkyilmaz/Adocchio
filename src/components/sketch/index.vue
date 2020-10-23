@@ -24,9 +24,13 @@ export default {
         x: data.x,
         y: data.y
       }
+      if (this.controller.scene.mode === 'sketch') return
+      this.controller.scene.setMode = 'sketch'
     })
 
     Events.$on('lost-detection', (d) => {
+      if (this.controller.scene.mode === 'idle') return
+      this.controller.scene.setMode = 'idle'
     })
   }
 }

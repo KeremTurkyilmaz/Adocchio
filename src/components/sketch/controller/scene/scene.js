@@ -4,6 +4,7 @@ export default class Scene {
 		this.ctx = options.ctx
 		this.bounds = options.bounds
 		this.frames = 0
+		this.mode = 'sketch'
 		this.eyes = []
 		this.coordinates = {
 			x: 0,
@@ -46,6 +47,11 @@ export default class Scene {
 	post() {
 		// Restore context sate
 		this.ctx.restore()
+	}
+
+	set setMode(mode) {
+		console.log('Update scene mode ' + mode)
+		this.mode = mode
 	}
 
 	set updateCoordinates(coord) {
