@@ -14,8 +14,8 @@ Vue.prototype.$config = {
 		h: 216
 	},
 	input: {
-		w: 1920,
-		h: 1080
+		w: 768,
+		h: 432
 	}
 }
 
