@@ -26,6 +26,9 @@ export default class Camera {
 		// Flip camera option
 		this.flip = options.flip
 
+		// Timer
+		this.timer = 0
+
 		// Check if capture is enabled
 		this.captureVideo = options.captureVideo
 
@@ -129,7 +132,13 @@ export default class Camera {
 						})
 					}
 				} else {
-					Events.$emit('lost-detection', null)
+					// After 4 seconds we lost the detection, set idle mode
+					if (this.timer >= 240) {
+						Events.$emit('lost-detection', null)
+						this.timer = 0
+					} else {
+						this.timer++
+					}
 				}
 			}
 
