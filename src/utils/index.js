@@ -23,6 +23,10 @@ export const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+// Move
+export const move = (min, max, time) => {
+  return map(Math.cos(time * 0.02), -1, 1, min, max);
+};
 
 export function map(n, in_min, in_max, out_min, out_max) {
     return (n - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
