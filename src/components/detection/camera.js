@@ -99,7 +99,7 @@ export default class Camera {
 		if (this.captureVideo) {
 			this.ctx.save()
 
-			// Flip the cancas if we want the right mirrow effect
+			// Flip the canvas if we want the right mirrow effect
 			if (this.flip) {
 				this.ctx.scale(-1, 1)
 				this.ctx.translate(-this.canvas.width, 0)
@@ -124,7 +124,12 @@ export default class Camera {
 						const face = this.faces[0]
 						let cx = face.x + face.w / 2
 						let cy = face.y + face.y / 2
-						cx = map(cx, this.canvas.width, 0, 0, window.innerWidth)
+						// Check for mirrow effect
+						if (this.flip) {
+							cx = map(cx, this.canvas.width, 0, 0, window.innerWidth)
+						} else {
+							cx = map(cx, 0, this.canvas.width, 0, window.innerWidth)
+						}
 						cy = map(cy, 0, this.canvas.height, 0, window.innerHeight)
 						Events.$emit('detected', {
 							x: cx,
