@@ -3,22 +3,21 @@ export default class Scene {
 		this.options = options
 		this.ctx = options.ctx
 		this.bounds = options.bounds
-		this.frames = 0
+		this.frameCount = 0
 		this.mode = 'sketch'
 		this.eyes = []
 		this.coordinates = {
-			x: 0,
-			y: 0
+			x: window.innerWidth / 2,
+			y: window.innerHeight / 2
 		}
 	}
+
 	pre() {
 		// Clear the background
-		this.ctx.clearRect(0, 0, this.bounds.w, this.bounds.h)
-
 		// Display current frame
-		this.ctx.fillText(this.frames, 10, 20)
-
 		// Save context state
+		this.ctx.clearRect(0, 0, this.bounds.w, this.bounds.h)
+		this.ctx.fillText(this.frameCount, 10, 20)
 		this.ctx.save()
 	}
 
@@ -29,6 +28,7 @@ export default class Scene {
 		// Increment frameCount
 		this.frameCount++
 	}
+
 	render() {
 		if (!this.eyes) return
 
@@ -44,6 +44,7 @@ export default class Scene {
 		this.ctx.arc(this.coordinates.x, this.coordinates.y, 20, 0, 2 * Math.PI)
 		this.ctx.fill()
 	}
+
 	post() {
 		// Restore context sate
 		this.ctx.restore()
