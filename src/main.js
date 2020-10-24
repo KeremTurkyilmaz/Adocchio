@@ -5,6 +5,7 @@ import './assets/styles/main.scss'
 Vue.config.productionTip = false
 
 Vue.prototype.$config = {
+	followMouse: false,
 	detectFaces: false,
 	captureVideo: true,
 	flip: true,
