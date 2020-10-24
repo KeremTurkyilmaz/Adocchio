@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Sketch />
-    <!-- <Capture /> -->
+    <Capture />
   </div>
 </template>
 
