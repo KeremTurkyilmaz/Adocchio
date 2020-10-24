@@ -20,23 +20,17 @@ export const lerp = (start, end, amt) => {
 
 // Generate a random integer with min and max included
 export const random = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-// Move
-export const move = (min, max, time) => {
-  return map(Math.cos(time * 0.02), -1, 1, min, max);
-};
+	return Math.floor(Math.random() * (max - min + 1) + min)
+}
 
 export function map(n, in_min, in_max, out_min, out_max) {
-    return (n - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+	return ((n - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
 }
 
 // Conver angle to radians
-export const radians = angle => (angle * Math.PI) / 180.0;
+export const radians = angle => (angle * Math.PI) / 180.0
 
 export const calculateGrid = (options = {}) => {
-
 	// Check props
 	const modulo = options.modulo || 100
 	const bounds = options.bounds || { w: window.innerWidth, h: window.innerHeight }
