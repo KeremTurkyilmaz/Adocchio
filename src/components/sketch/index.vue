@@ -12,17 +12,21 @@ export default {
   name: 'Sketch',
   mounted() {
     // Canvas reference
-    this.canvas = this.$refs.canvas
+		this.canvas = this.$refs.canvas
 
+		// Create new controller
     this.controller = new Controller({
       animate: true,
       canvas: this.canvas
     })
 
     // Init the controller
-    this.controller.init()
+		this.controller.init()
+
+		// Start drawing
     this.controller.draw()
 
+		// Listen for mouse move
     this.canvas.addEventListener('mousemove', (e) => {
       const mouse = {
         x: e.clientX,
@@ -31,15 +35,17 @@ export default {
       this.controller.scene.updateCoordinates = mouse
     })
 
+		// Listen for detected faces -> Emitted by camera.js
     // Events.$on('detected', (data) => {
-    //   this.controller.scene.updateCoordinates = {
-    //     x: data.x,
+			//   this.controller.scene.updateCoordinates = {
+				//     x: data.x,
     //     y: data.y
     //   }
     //   if (this.controller.scene.mode === 'sketch') return
     //   this.controller.scene.setMode = 'sketch'
     // })
 
+		// Listen for detected faces -> Emitted by camera.js
     // Events.$on('lost-detection', (d) => {
     //   if (this.controller.scene.mode === 'idle') return
     //   this.controller.scene.setMode = 'idle'
