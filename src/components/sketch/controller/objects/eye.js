@@ -33,11 +33,9 @@ export default class Eye {
 		// Check if the eye is closed
 		this.isClosed = false
 
-		// Pos and Des
+		// Pos
 		this.pos = { x: 0, y: 0 }
-		this.des = { x: 0, y: 0 }
 
-	
 		// Dummy method for close an eye
 		// let interval = random(3000, 20000)
 		// setInterval(() => {
@@ -66,7 +64,8 @@ export default class Eye {
 		this.mouse_ang = Math.atan2(coordinates.y - this.center.y, coordinates.x - this.center.x)
 		this.mouse_rad = this.dPunti(this.center.x, this.center.y, coordinates.x, coordinates.y)
 		this.eye_ang = Math.atan(this.mouse_rad / this.iris_r) * 0.7
-		if (this.eye_ang > radians(90) - this.iris_arc) this.eye_ang = radians(90) - this.iris_arc
+		// if (this.eye_ang > radians(90) - this.iris_arc) this.eye_ang = radians(90) - this.iris_arc
+		this.pos.x = this.iris_r * Math.sin(this.eye_ang)
 	}
 
 	render(ctx) {
@@ -83,13 +82,13 @@ export default class Eye {
 
 			// Iris
 			ctx.save()
-			ctx.translate(this.iris_r * Math.sin(this.eye_ang), 0)
+			ctx.translate(this.pos.x, this.pos.y)
 			ctx.drawImage(this.iris, -this.iris_radius / 2, -this.iris_radius / 2, this.iris_radius * Math.cos(this.eye_ang), this.iris_radius)
 			ctx.restore()
 
 			// Pupil
 			ctx.save()
-			ctx.translate(this.iris_r * Math.sin(this.eye_ang), 0)
+			ctx.translate(this.pos.x, this.pos.y)
 			ctx.drawImage(this.pupil, -this.pupil_radius / 2, -this.pupil_radius / 2, this.pupil_radius * Math.cos(this.eye_ang), this.pupil_radius)
 			ctx.restore()
 			ctx.restore()
