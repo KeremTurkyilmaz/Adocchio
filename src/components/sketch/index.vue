@@ -12,18 +12,18 @@ export default {
   name: 'Sketch',
   mounted() {
     // Canvas reference
-		this.canvas = this.$refs.canvas
+    this.canvas = this.$refs.canvas
 
-		// Create new controller
+    // Create new controller
     this.controller = new Controller({
       animate: true,
       canvas: this.canvas
     })
 
     // Init the controller
-		this.controller.init()
+    this.controller.init()
 
-		// Start drawing
+    // Start drawing
     this.controller.draw()
 
 		// Listen for mouse move
