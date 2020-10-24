@@ -6,10 +6,16 @@ export default class Scene {
 		this.frameCount = 0
 		this.mode = 'sketch'
 		this.eyes = []
+		this.center = {
 		this.coordinates = {
 			x: window.innerWidth / 2,
 			y: window.innerHeight / 2
 		}
+		this.coordinates = {
+			x: this.center.x,
+			y: this.center.y
+		}
+		this.mover = new Mover()
 	}
 
 	pre() {
