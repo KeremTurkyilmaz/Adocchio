@@ -102,6 +102,20 @@ export default class Eye {
 		if (debug) {
 			ctx.strokeStyle = 'gray'
 			ctx.strokeRect(this.origin.x, this.origin.y, this.radius, this.radius)
+
+			ctx.beginPath();
+			ctx.moveTo(this.origin.x, this.origin.y)
+			ctx.lineTo(this.origin.x+this.radius, this.origin.y+this.radius)
+			ctx.stroke();
+
+			ctx.beginPath();
+			ctx.moveTo(this.origin.x, this.origin.y + this.radius)
+			ctx.lineTo(this.origin.x+this.radius, this.origin.y)
+			ctx.stroke();
+
+			ctx.beginPath();
+			ctx.ellipse(this.center.x, this.center.y, 20, 20, 0, 0, Math.PI*2)
+			ctx.stroke();
 		}
 	}
 }
