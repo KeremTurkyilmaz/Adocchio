@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import Events from '@/plugins/events'
 import Controller from './controller'
 
 export default {
