@@ -12,28 +12,39 @@ import { move } from '@/utils'
 export default {
   name: 'Sketch',
   mounted() {
+    // Canvas reference
+    this.canvas = this.$refs.canvas
+
     this.controller = new Controller({
       animate: true,
-      canvas: this.$refs.canvas
+      canvas: this.canvas
     })
 
     // Init the controller
     this.controller.init()
     this.controller.draw()
 
-    Events.$on('detected', (data) => {
-      this.controller.scene.updateCoordinates = {
-        x: data.x,
-        y: data.y
+    this.canvas.addEventListener('mousemove', (e) => {
+      const mouse = {
+        x: e.clientX,
+        y: e.clientY
       }
-      if (this.controller.scene.mode === 'sketch') return
-      this.controller.scene.setMode = 'sketch'
+      this.controller.scene.updateCoordinates = mouse
     })
 
-    Events.$on('lost-detection', (d) => {
-      if (this.controller.scene.mode === 'idle') return
-      this.controller.scene.setMode = 'idle'
-    })
+    // Events.$on('detected', (data) => {
+    //   this.controller.scene.updateCoordinates = {
+    //     x: data.x,
+    //     y: data.y
+    //   }
+    //   if (this.controller.scene.mode === 'sketch') return
+    //   this.controller.scene.setMode = 'sketch'
+    // })
+
+    // Events.$on('lost-detection', (d) => {
+    //   if (this.controller.scene.mode === 'idle') return
+    //   this.controller.scene.setMode = 'idle'
+    // })
   }
 }
 </script>
