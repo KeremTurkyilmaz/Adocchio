@@ -1,3 +1,5 @@
+import Mover from '../objects/mover'
+
 export default class Scene {
 	constructor(options = {}) {
 		this.options = options
@@ -7,7 +9,6 @@ export default class Scene {
 		this.mode = 'sketch'
 		this.eyes = []
 		this.center = {
-		this.coordinates = {
 			x: window.innerWidth / 2,
 			y: window.innerHeight / 2
 		}
@@ -29,26 +30,38 @@ export default class Scene {
 
 	update() {
 		if (!this.eyes) return
-		if (this.frameCount % 120 == 0) console.log(this.mode)
+		// if (this.frameCount % 120 == 0) console.log(this.mode)
 
 		// Increment frameCount
 		this.frameCount++
+
+		// Update mover
+		if (this.mode === 'idle') this.mover.update(this.frameCount * 0.002)
+
 	}
 
 	render() {
 		if (!this.eyes) return
 
-		// Draw eyes
+		if (this.mode === 'idle') this.moverCoordinates = this.mover.position
+
 		this.eyes.forEach(eye => {
-			eye.follow(this.coordinates)
+			if (this.mode === 'sketch') eye.follow(this.coordinates)
+			if (this.mode === 'idle') eye.follow(this.moverCoordinates)
 			eye.render(this.ctx)
 		})
 
 		// Draw an ellipse according to the coordinates
-		this.ctx.fillStyle = '#FF0000'
-		this.ctx.beginPath()
-		this.ctx.arc(this.coordinates.x, this.coordinates.y, 20, 0, 2 * Math.PI)
-		this.ctx.fill()
+		if (this.mode === 'sketch') {
+			this.ctx.fillStyle = '#FF0000'
+			this.ctx.beginPath()
+			this.ctx.arc(this.coordinates.x, this.coordinates.y, 20, 0, 2 * Math.PI)
+			this.ctx.fill()
+		}
+		if (this.mode === 'idle') {
+			// Draw mover
+			this.mover.render(this.ctx)
+		}
 	}
 
 	post() {
