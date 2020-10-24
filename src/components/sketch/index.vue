@@ -26,11 +26,16 @@ export default {
     // Start drawing
     this.controller.draw()
 
-		// Listen for mouse move
-    this.canvas.addEventListener('mousemove', (e) => {
-      const mouse = {
-        x: e.clientX,
-        y: e.clientY
+    // Listen for mouse move
+    if (this.$config.followMouse) {
+      this.canvas.addEventListener('mousemove', (e) => {
+        const mouse = {
+          x: e.clientX,
+          y: e.clientY
+        }
+        this.controller.scene.updateCoordinates = mouse
+      })
+    }
       }
       this.controller.scene.updateCoordinates = mouse
     })
