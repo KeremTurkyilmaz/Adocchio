@@ -1,28 +1,46 @@
 export default class Mover {
-	constructor(options = {}) {
-		this.options = options
-		this.damp = 0.01
+	constructor() {
+		this.bounds = {
+			w: window.innerWidth,
+			h: window.innerHeight
+		}
 		this.pos = { x: 0, y: 0 }
-		this.des = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+
+		this.range = {
+			x: this.bounds.w / 2.2,
+			y: this.bounds.h / 2.2
+		}
+		this.limit = {
+			x: Math.round(Math.random() * 9) + 1,
+			y: Math.round(Math.random() * 9) + 1
+		}
+
+		// setInterval(() => {
+		// 	console.log('Update Trajectory')
+		// 	this.updateTrajectory();
+		// }, 5000)
+
 	}
 
-	newPos(des) {
-		this.des = des
+	updateTrajectory() {
+		this.limit = {
+			x: Math.round(Math.random() * 9) + 1,
+			y: Math.round(Math.random() * 9) + 1
+		}
 	}
 
-	update() {
-		const dx = (this.des.x - this.pos.x) * this.damp
-		const dy = (this.des.y - this.pos.y) * this.damp
-		this.pos.x += dx
-		this.pos.y += dy
+	update(time) {
+		this.pos.x = this.range.x * Math.sin(this.limit.x * time) + this.bounds.w / 2
+		this.pos.y = this.range.y * Math.sin(this.limit.y * time) + this.bounds.h / 2
 	}
 
 	render(ctx) {
 		ctx.save()
+		ctx.fillStyle = '#00FF00'
 		ctx.beginPath()
 		ctx.ellipse(this.pos.x, this.pos.y, 20, 20, 0, 0, Math.PI * 2)
 		ctx.stroke()
-		ctx.restore()
+		ctx.fill()
 	}
 
 	get position() {
