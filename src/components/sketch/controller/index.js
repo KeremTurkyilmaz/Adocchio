@@ -31,7 +31,7 @@ export default class Controller {
 		// List of scenes
 		this.scenes = []
 
-		// Let's add some scene to scenes list
+		// Let's add some scene to the scenes list
 		this.scenes.push(new S_Grid(this.options))
 
 		// Init scene
