@@ -36,25 +36,22 @@ export default {
         this.controller.scene.updateCoordinates = mouse
       })
     }
+
+    // Listen for detected faces -> Emitted by camera.js
+    Events.$on('detected', (data) => {
+      this.controller.scene.updateCoordinates = {
+        x: data.x,
+        y: data.y
       }
-      this.controller.scene.updateCoordinates = mouse
+      if (this.controller.scene.mode === 'sketch') return
+      this.controller.scene.setMode = 'sketch'
     })
 
-		// Listen for detected faces -> Emitted by camera.js
-    // Events.$on('detected', (data) => {
-			//   this.controller.scene.updateCoordinates = {
-				//     x: data.x,
-    //     y: data.y
-    //   }
-    //   if (this.controller.scene.mode === 'sketch') return
-    //   this.controller.scene.setMode = 'sketch'
-    // })
-
-		// Listen for detected faces -> Emitted by camera.js
-    // Events.$on('lost-detection', (d) => {
-    //   if (this.controller.scene.mode === 'idle') return
-    //   this.controller.scene.setMode = 'idle'
-    // })
+    // Listen for detected faces -> Emitted by camera.js
+    Events.$on('lost-detection', () => {
+      if (this.controller.scene.mode === 'idle') return
+      this.controller.scene.setMode = 'idle'
+    })
   }
 }
 </script>
