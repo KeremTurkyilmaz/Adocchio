@@ -43,8 +43,8 @@ export default {
         x: data.x,
         y: data.y
       }
-      if (this.controller.scene.mode === 'sketch') return
-      this.controller.scene.setMode = 'sketch'
+      if (this.controller.scene.mode === 'detection') return
+      this.controller.scene.setMode = 'detection'
     })
 
     // Listen for detected faces -> Emitted by camera.js

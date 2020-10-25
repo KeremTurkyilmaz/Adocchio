@@ -6,7 +6,7 @@ export default class Scene {
 		this.ctx = options.ctx
 		this.bounds = options.bounds
 		this.frameCount = 0
-		this.mode = 'sketch'
+		this.mode = 'detection'
 		this.eyes = []
 		this.center = {
 			x: window.innerWidth / 2,
@@ -46,13 +46,13 @@ export default class Scene {
 		if (this.mode === 'idle') this.moverCoordinates = this.mover.position
 
 		this.eyes.forEach(eye => {
-			if (this.mode === 'sketch') eye.follow(this.coordinates)
+			if (this.mode === 'detection') eye.follow(this.coordinates)
 			if (this.mode === 'idle') eye.follow(this.moverCoordinates)
 			eye.render(this.ctx)
 		})
 
 		// Draw an ellipse according to the coordinates
-		if (this.mode === 'sketch') {
+		if (this.mode === 'detection') {
 			this.ctx.fillStyle = '#FF0000'
 			this.ctx.beginPath()
 			this.ctx.arc(this.coordinates.x, this.coordinates.y, 20, 0, 2 * Math.PI)
