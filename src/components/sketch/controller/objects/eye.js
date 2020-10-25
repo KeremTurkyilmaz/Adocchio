@@ -20,10 +20,10 @@ export default class Eye {
 		}
 
 		// Load all sprites
-		this.eye = this.loadImage('sprites', `eye.png`)
+		this.eye_open = this.loadImage('sprites', `eye.png`)
+		this.eye_closed = this.loadImage('sprites', `closed.png`)
 		this.iris = this.loadImage('sprites', `iris.png`)
 		this.pupil = this.loadImage('sprites', `pupil.png`)
-		this.eye_closed = this.loadImage('sprites', `closed.png`)
 
 		// Iris and Pupil Radius
 		this.iris_radius = this.radius * 0.7
@@ -71,7 +71,7 @@ export default class Eye {
 			// Eye
 			this.ctx.save()
 			this.ctx.translate(this.center.x, this.center.y)
-			this.ctx.drawImage(this.eye, -this.eye.width / 2, -this.eye.height / 2, this.eye.width, this.eye.height)
+			this.ctx.drawImage(this.eye_open, -this.eye_open.width / 2, -this.eye_open.height / 2, this.eye_open.width, this.eye_open.height)
 			this.ctx.restore()
 
 			this.ctx.save()
