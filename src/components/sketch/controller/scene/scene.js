@@ -1,4 +1,5 @@
 import Mover from '../objects/mover'
+import { random } from '@/utils'
 
 export default class Scene {
 	constructor(options = {}) {
@@ -17,6 +18,7 @@ export default class Scene {
 			y: this.center.y
 		}
 		this.mover = new Mover()
+		this.eyesTimeout = null
 	}
 
 	pre() {
@@ -61,10 +63,32 @@ export default class Scene {
 		this.ctx.restore()
 	}
 
+	toggleEyesBehavior() {
+		if (this.mode === 'idle') {
+			this.eyes.forEach(eye => {
+				let time = random(5000, 10000)
+				this.eyesTimeout = function() {
+					console.log('Ciao')
+					time = random(5000, 10000)
+					eye.closeEye = !eye.isClosed
+					setTimeout(this.eyesTimeout, time)
+				}
+				setTimeout(this.eyesTimeout, time)
+			})
+		}
+		if (this.mode === 'detection') {
+			clearTimeout(this.eyesTimeout)
+			this.eyes.forEach(eye => {
+				eye.closeEye = false
+			})
+		}
+	}
+
 	set setMode(mode) {
 		// Set scene mode -> 'detection' or 'idle'
 		console.log('Update scene mode ' + mode)
 		this.mode = mode
+		this.toggleEyesBehavior();
 	}
 
 	set updateCoordinates(coord) {
