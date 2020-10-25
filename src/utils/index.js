@@ -61,9 +61,22 @@ export const calculateGrid = (options = {}) => {
 		y: offY / (rows + 1)
 	}
 
+	// Store all'origin into an Array
+	const origins = []
+	for (let i = 0; i < rows; i++) {
+		for (let j = 0; j < cols; j++) {
+			origins.push({
+				x: i * modulo + pad.x * (i + 1),
+				y: j * modulo + pad.y * (j + 1)
+			})
+		}
+	}
+
 	return {
+		cells: rows * cols,
 		cols: cols,
 		rows: rows,
-		pad: pad
+		pad: pad,
+		origins
 	}
 }

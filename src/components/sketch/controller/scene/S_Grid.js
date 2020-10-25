@@ -20,22 +20,16 @@ export default class S_Grid extends Scene {
 			bounds: this.bounds
 		})
 
-		// Loop trought rows and columns
-		for (let j = 0; j < this.grid.rows; j++) {
-			for (let i = 0; i < this.grid.cols; i++) {
-				// Add eye to the eyes list
-				this.eyes.push(
-					// Create new eye
-					new Eye({
-						ctx: this.ctx,
-						origin: {
-							x: i * this.modulo + this.grid.pad.x * (i + 1),
-							y: j * this.modulo + this.grid.pad.y * (j + 1)
-						},
-						radius: this.modulo
-					})
-				)
-			}
+		for (let i = 0; i < this.grid.cells; i++) {
+			const eye = new Eye({
+				ctx: this.ctx,
+				origin: {
+					x: this.grid.origins[i].x,
+					y: this.grid.origins[i].y
+				},
+				radius: this.modulo
+			})
+			this.eyes.push(eye)
 		}
 	}
 }
