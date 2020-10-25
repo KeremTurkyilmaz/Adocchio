@@ -12,7 +12,7 @@ export default class S_Grid extends Scene {
 
 	init() {
 		// Define eye radius
-		this.modulo = 400
+		this.modulo = 100
 
 		// Calculate a perfect grid based on modulo size and the container bounds
 		this.grid = calculateGrid({
@@ -20,16 +20,18 @@ export default class S_Grid extends Scene {
 			bounds: this.bounds
 		})
 
-		for (let i = 0; i < this.grid.cells; i++) {
-			const eye = new Eye({
-				ctx: this.ctx,
-				origin: {
-					x: this.grid.origins[i].x,
-					y: this.grid.origins[i].y
-				},
-				radius: this.modulo
-			})
-			this.eyes.push(eye)
+		for (let i = 0; i < this.grid.rows; i++) {
+			for (let j = 0; j < this.grid.cols; j++) {
+				const eye = new Eye({
+					ctx: this.ctx,
+					origin: {
+						x: i * this.modulo + this.grid.pad.x * (i + 1),
+						y: j * this.modulo + this.grid.pad.y * (j + 1)
+					},
+					radius: this.modulo
+				})
+				this.eyes.push(eye)
+			}
 		}
 	}
 }
