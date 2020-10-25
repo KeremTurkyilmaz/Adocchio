@@ -6,7 +6,7 @@
 
 <script>
 import Events from '@/plugins/events'
-import Controller from './controller'
+import Controller from './controller/controller'
 
 export default {
   name: 'Sketch',
