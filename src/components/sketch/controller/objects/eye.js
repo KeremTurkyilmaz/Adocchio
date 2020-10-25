@@ -10,6 +10,9 @@ export default class Eye {
 		// Eye Radius
 		this.radius = options.radius
 
+		// Context
+		this.ctx = options.ctx
+
 		// Eye center
 		this.center = {
 			x: this.origin.x + this.radius / 2,
@@ -63,56 +66,56 @@ export default class Eye {
 		// if (this.eye_angle > radians(90) - this.iris_arc) this.eye_angle = radians(90) - this.iris_arc
 	}
 
-	render(ctx) {
+	render() {
 		if (!this.isClosed) {
 			// Eye
-			ctx.save()
-			ctx.translate(this.center.x, this.center.y)
-			ctx.drawImage(this.eye, -this.eye.width / 2, -this.eye.height / 2, this.eye.width, this.eye.height)
-			ctx.restore()
+			this.ctx.save()
+			this.ctx.translate(this.center.x, this.center.y)
+			this.ctx.drawImage(this.eye, -this.eye.width / 2, -this.eye.height / 2, this.eye.width, this.eye.height)
+			this.ctx.restore()
 
-			ctx.save()
-			ctx.translate(this.center.x, this.center.y)
-			ctx.rotate(this.angle)
-			ctx.scale(0.8, 0.8)
+			this.ctx.save()
+			this.ctx.translate(this.center.x, this.center.y)
+			this.ctx.rotate(this.angle)
+			this.ctx.scale(0.8, 0.8)
 
 			// Iris
-			ctx.save()
-			ctx.translate(this.pos.x, this.pos.y)
-			ctx.drawImage(this.iris, -this.iris_radius / 2, -this.iris_radius / 2, this.iris_radius * Math.cos(this.eye_angle), this.iris_radius)
-			ctx.restore()
+			this.ctx.save()
+			this.ctx.translate(this.pos.x, this.pos.y)
+			this.ctx.drawImage(this.iris, -this.iris_radius / 2, -this.iris_radius / 2, this.iris_radius * Math.cos(this.eye_angle), this.iris_radius)
+			this.ctx.restore()
 
 			// Pupil
-			ctx.save()
-			ctx.translate(this.pos.x, this.pos.y)
-			ctx.drawImage(this.pupil, -this.pupil_radius / 2, -this.pupil_radius / 2, this.pupil_radius * Math.cos(this.eye_angle), this.pupil_radius)
-			ctx.restore()
-			ctx.restore()
+			this.ctx.save()
+			this.ctx.translate(this.pos.x, this.pos.y)
+			this.ctx.drawImage(this.pupil, -this.pupil_radius / 2, -this.pupil_radius / 2, this.pupil_radius * Math.cos(this.eye_angle), this.pupil_radius)
+			this.ctx.restore()
+			this.ctx.restore()
 		} else {
 			// Draw closed eye
-			ctx.save()
-			ctx.translate(this.center.x, this.center.y)
-			ctx.drawImage(this.eye_closed, -this.eye_closed.width / 2, -this.eye_closed.height / 2, this.eye_closed.width, this.eye_closed.height)
-			ctx.restore()
+			this.ctx.save()
+			this.ctx.translate(this.center.x, this.center.y)
+			this.ctx.drawImage(this.eye_closed, -this.eye_closed.width / 2, -this.eye_closed.height / 2, this.eye_closed.width, this.eye_closed.height)
+			this.ctx.restore()
 		}
 
 		if (debug) {
-			ctx.strokeStyle = 'gray'
-			ctx.strokeRect(this.origin.x, this.origin.y, this.radius, this.radius)
+			this.ctx.strokeStyle = 'gray'
+			this.ctx.strokeRect(this.origin.x, this.origin.y, this.radius, this.radius)
 
-			ctx.beginPath()
-			ctx.moveTo(this.origin.x, this.origin.y)
-			ctx.lineTo(this.origin.x + this.radius, this.origin.y + this.radius)
-			ctx.stroke()
+			this.ctx.beginPath()
+			this.ctx.moveTo(this.origin.x, this.origin.y)
+			this.ctx.lineTo(this.origin.x + this.radius, this.origin.y + this.radius)
+			this.ctx.stroke()
 
-			ctx.beginPath()
-			ctx.moveTo(this.origin.x, this.origin.y + this.radius)
-			ctx.lineTo(this.origin.x + this.radius, this.origin.y)
-			ctx.stroke()
+			this.ctx.beginPath()
+			this.ctx.moveTo(this.origin.x, this.origin.y + this.radius)
+			this.ctx.lineTo(this.origin.x + this.radius, this.origin.y)
+			this.ctx.stroke()
 
-			ctx.beginPath()
-			ctx.ellipse(this.center.x, this.center.y, 20, 20, 0, 0, Math.PI * 2)
-			ctx.stroke()
+			this.ctx.beginPath()
+			this.ctx.ellipse(this.center.x, this.center.y, 20, 20, 0, 0, Math.PI * 2)
+			this.ctx.stroke()
 		}
 	}
 }

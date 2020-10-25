@@ -27,6 +27,7 @@ export default class S_Grid extends Scene {
 				this.eyes.push(
 					// Create new eye
 					new Eye({
+						ctx: this.ctx,
 						origin: {
 							x: i * this.modulo + this.grid.pad.x * (i + 1),
 							y: j * this.modulo + this.grid.pad.y * (j + 1)
