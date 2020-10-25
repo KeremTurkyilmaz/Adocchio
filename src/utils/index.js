@@ -1,19 +1,24 @@
+// Resize element
 export const resize = (el, w, h) => {
 	el.width = w
 	el.height = h
 }
 
+// Resize a DOM element through css
 export const resizeCSS = (el, s) => {
 	el.style.width = el.width * s + 'px'
 	el.style.height = el.height * s + 'px'
 }
 
+// Returns a number whose value is limited to the given range.
 export const clamp = (num, min, max) => {
 	return num <= min ? min : num >= max ? max : num
 }
 
+// Normalize a value
 export const normalize = (val, min, max) => (val - min) / (max - min)
 
+// Linear interpolate the vector to another vector
 export const lerp = (start, end, amt) => {
 	return (1 - amt) * start + amt * end
 }
@@ -23,11 +28,12 @@ export const random = (min, max) => {
 	return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+// Re-maps a number from one range to another.
 export function map(n, in_min, in_max, out_min, out_max) {
 	return ((n - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
 }
 
-// Conver angle to radians
+// Convert angle to radians
 export const radians = angle => (angle * Math.PI) / 180.0
 
 export const calculateGrid = (options = {}) => {
