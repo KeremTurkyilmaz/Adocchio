@@ -52,17 +52,10 @@ export default class Scene {
 			eye.render(this.ctx)
 		})
 
-		// Draw an ellipse according to the coordinates
-		if (this.mode === 'detection') {
-			this.ctx.fillStyle = '#FF0000'
-			this.ctx.beginPath()
-			this.ctx.arc(this.coordinates.x, this.coordinates.y, 20, 0, 2 * Math.PI)
-			this.ctx.fill()
-		}
-		if (this.mode === 'idle') {
-			// Draw mover
-			this.mover.render(this.ctx)
-		}
+		// Detection coordinates
+		if (this.mode === 'detection') drawDot(this.ctx, this.coordinates)
+		// Draw mover
+		if (this.mode === 'idle') drawDot(this.ctx, this.moverCoordinates)
 	}
 
 	post() {
@@ -81,4 +74,11 @@ export default class Scene {
 		if (this.coordinates === coord) return
 		this.coordinates = coord
 	}
+}
+
+const drawDot = (ctx, pos) => {
+	ctx.fillStyle = '#FF0FFF'
+	ctx.beginPath()
+	ctx.arc(pos.x, pos.y, 20, 0, 2 * Math.PI)
+	ctx.fill()
 }
