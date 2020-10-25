@@ -64,13 +64,13 @@ export default class Scene {
 	}
 
 	set setMode(mode) {
+		// Set scene mode -> 'detection' or 'idle'
 		console.log('Update scene mode ' + mode)
 		this.mode = mode
 	}
 
 	set updateCoordinates(coord) {
 		// If the coordinates are the same, return
-		// Otherwise continue and update the coordinates
 		if (this.coordinates === coord) return
 		this.coordinates = coord
 	}
