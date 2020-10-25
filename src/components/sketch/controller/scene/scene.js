@@ -59,7 +59,7 @@ export default class Scene {
 	}
 
 	post() {
-		// Restore context sate
+		// Restore context state
 		this.ctx.restore()
 	}
 
