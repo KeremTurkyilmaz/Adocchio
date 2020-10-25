@@ -12,7 +12,7 @@ export default class S_Grid extends Scene {
 
 	init() {
 		// Define eye radius
-		this.modulo = 200
+		this.modulo = 400
 
 		// Calculate a perfect grid based on modulo size and the container bounds
 		this.grid = calculateGrid({
