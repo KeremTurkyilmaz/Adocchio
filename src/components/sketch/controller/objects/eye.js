@@ -66,6 +66,10 @@ export default class Eye {
 		// if (this.eye_angle > radians(90) - this.iris_arc) this.eye_angle = radians(90) - this.iris_arc
 	}
 
+	set closeEye(val) {
+		this.isClosed = val
+	}
+
 	render() {
 		if (!this.isClosed) {
 			// Eye
