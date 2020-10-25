@@ -44,8 +44,6 @@ export default class Scene {
 	}
 
 	render() {
-		if (!this.eyes) return
-
 		this.eyes.forEach(eye => {
 			if (this.mode === 'detection') eye.follow(this.coordinates)
 			if (this.mode === 'idle') eye.follow(this.moverCoordinates)
