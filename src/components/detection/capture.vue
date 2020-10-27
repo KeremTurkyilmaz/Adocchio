@@ -68,19 +68,13 @@ export default {
   methods: {
     toggleCamera() {
       this.pausedVideo = !this.pausedVideo
-      if (this.pausedVideo) {
-        this.camera.stopCapture()
-      } else {
-        this.camera.startCapture()
-      }
+      if (this.pausedVideo) this.camera.stopCapture()
+      else this.camera.startCapture()
     },
     toggleDetection() {
       this.pausedDetection = !this.pausedDetection
-      if (this.pausedDetection) {
-        this.camera.stopDetection()
-      } else {
-        this.camera.startDetection()
-      }
+      if (this.pausedDetection) this.camera.stopDetection()
+      else this.camera.startDetection()
     }
   }
 }
@@ -98,12 +92,12 @@ export default {
     display: flex;
     flex-direction: row;
     width: 50%;
-		justify-content: center;
-		align-items: center;
-		background-color: $col-white;
-		min-height: 3rem;
+    justify-content: center;
+    align-items: center;
+    background-color: $col-white;
+    min-height: 3rem;
     p {
-			font-weight: 900;
+      font-weight: 900;
       color: $col-dark;
       margin: 0 1rem;
       &:hover {
