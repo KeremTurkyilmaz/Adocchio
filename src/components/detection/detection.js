@@ -1,76 +1,88 @@
-const FaceDetector = require('facedetector')
+import Events from '@/plugins/events'
+import Pico from '@/plugins/vendor/pico.js'
+import { rgba_to_grayscale } from '@/utils'
 
-export default class FaceDetection {
+const modelURL = 'https://raw.githubusercontent.com/nenadmarkus/pico/c2e81f9d23cc11d1a612fd21e4f9de0921a5d0d9/rnt/cascades/facefinder'
+
+const defaultParams = {
+	detection: {
+		shiftfactor: 0.1, // move the detection window by 10% of its size
+		minsize: 100, // minimum size of a face
+		maxsize: 1000, // maximum size of a face
+		scalefactor: 1.1 // for multiscale processing: resize the detection window by 10% when moving to the higher scale
+	},
+	// It works best with small values
+	memory: 10 // we will use the detecions of the last n frames
+}
+
+export default class Detection {
 	constructor(options = {}) {
-		this.input = options.input
 		this._faces = []
-		this.setup()
+		this.params = { ...defaultParams, ...options.params }
+		this.canvas = options.canvas
+	}
+
+	loadModel() {
+		fetch(modelURL).then(res => {
+			res.arrayBuffer().then(buffer => {
+				console.log('Model loaded')
+				this.ready = true
+				this.bytes = new Int8Array(buffer)
+				this.setup()
+			})
+		})
 	}
 
 	setup() {
-		if (this.input) {
-			// If input is valid
-			// We initialize the faceDetector library
-			// We pass the input video as a parameter
-			this.faceDetector = new FaceDetector({
-				video: this.input
-			})
-
-			// Start the detection
-			this.faceDetector.startDetecting()
-
-			// The model is loaded and ready
-			// We notify the controller with an emit
-			this.modelLoaded()
-		} else {
-			console.log('Can\'t read input stream')
-		}
-	}
-
-	modelLoaded() {
-		this.ready = true
+		console.log('Detection Setup')
+		this.Pico = new Pico()
+		this.memory = this.Pico.instantiate_detection_memory(this.params.memory)
+		this.model = this.Pico.unpack_cascade(this.bytes)
+		Events.$emit('ready', true)
 	}
 
 	detect() {
 		try {
-			// This is a function from the faceDetector library
-			// it calls a requestAnimationFrame method
-			this.faceDetector.setOnFaceUpdatedCallback(faces => {
-				let results = []
-				if (faces && faces.length) {
+			// Pico.js
+			const ctx = this.canvas.getContext('2d')
+			const rgba = ctx.getImageData(0, 0, this.canvas.width, this.canvas.height).data
+			const image = {
+				pixels: rgba_to_grayscale(rgba, this.canvas.height, this.canvas.width),
+				nrows: this.canvas.height,
+				ncols: this.canvas.width,
+				ldim: this.canvas.width
+			}
+			let dets = this.Pico.run_cascade(image, this.model, this.params.detection)
+			dets = this.memory(dets)
+			dets = this.Pico.cluster_detections(dets, 0.2)
+			for (let i = 0; i < dets.length; ++i) {
+				const face = dets[i]
+				if (face[3] > 50.0) {
+					let results = []
 					// Push into results array a normalized face object
-					results = faces.map(face => {
+					results = dets.map(face => {
 						return this.normalizeFace(face)
 					})
+					// Update faces array
+					this._faces = results
 				}
-				// Update faces array
-				this._faces = results
-			})
-			this.faceDetector.setOnFaceLostCallback(() => {
-				this._faces = []
-			})
+			}
 		} catch (e) {
-			// Log an error if the detection fails
 			console.error('Face detection failed:', e)
 		}
 	}
 
-	// Normalize face coordinates
-	// We scale the face coordinates according
-	// to the size of the input
 	normalizeFace(face) {
-		const x = face.x * this.input.width
-		const y = face.y * this.input.height
-		const w = face.width * this.input.width
-		const h = face.height * this.input.height
+		const x = face[1] - face[2] / 2
+		const y = face[0] - face[2] / 2
+		const w = face[2]
 		return {
 			x,
 			y,
 			w,
-			h,
 			center: {
-				x: x + w / 2,
-				y: y + h / 2
+				x: face[1],
+				y: face[0]
 			}
 		}
 	}
