@@ -98,12 +98,15 @@ export default {
     display: flex;
     flex-direction: row;
     width: 50%;
-    justify-content: center;
+		justify-content: center;
+		align-items: center;
+		background-color: $col-white;
+		min-height: 3rem;
     p {
-      color: $col-gray;
+			font-weight: 900;
+      color: $col-dark;
       margin: 0 1rem;
       &:hover {
-        color: $col-dark;
         cursor: pointer;
       }
     }
