@@ -30,7 +30,6 @@ export default class Scene {
 
 	update() {
 		if (!this.eyes) return
-		// if (this.frameCount % 120 == 0) console.log(this.mode)
 
 		// Increment frameCount
 		this.frameCount++
