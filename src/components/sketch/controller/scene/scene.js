@@ -23,10 +23,8 @@ export default class Scene {
 
 	pre() {
 		// Clear the background
-		// Display current frame
 		// Save context state
 		this.ctx.clearRect(0, 0, this.bounds.w, this.bounds.h)
-		this.ctx.fillText(this.frameCount, 10, 20)
 		this.ctx.save()
 	}
 
@@ -59,6 +57,9 @@ export default class Scene {
 	}
 
 	post() {
+		// Display current frame
+		this.ctx.fillText(this.frameCount, 10, 20)
+
 		// Restore context state
 		this.ctx.restore()
 	}
@@ -88,7 +89,7 @@ export default class Scene {
 		// Set scene mode -> 'detection' or 'idle'
 		console.log('Update scene mode ' + mode)
 		this.mode = mode
-		this.toggleEyesBehavior();
+		this.toggleEyesBehavior()
 	}
 
 	set updateCoordinates(coord) {
