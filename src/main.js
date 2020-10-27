@@ -10,6 +10,7 @@ Vue.prototype.$config = {
 	captureVideo: true,
 	flip: true,
 	interval: 1,
+	timerInterval: 5, // Seconds
 	detection: {
 		w: 640,
 		h: 380

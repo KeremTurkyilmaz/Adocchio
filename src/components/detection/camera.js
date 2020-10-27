@@ -1,6 +1,6 @@
 import Events from '@/plugins/events'
 import Detection from './detection'
-import { map, resize, resizeCSS } from '@/utils'
+import { secondsToFrames, map, resize, resizeCSS } from '@/utils'
 
 export default class Camera {
 	constructor(options = {}) {
@@ -9,6 +9,8 @@ export default class Camera {
 		this.flip = options.flip
 		this.detectFaces = options.detectFaces
 		this.captureVideo = options.captureVideo
+		this.timerInterval = secondsToFrames(options.timerInterval)
+		this.timer = 0
 		this.detection = options.detection
 		this.input = {
 			el: options.input.el,
@@ -76,7 +78,7 @@ export default class Camera {
 			// Detect faces
 			if (this.detectFaces && this.faceDetection) {
 				// If the detection isn't ready return
-				if(!this.faceDetection.ready) return
+				if (!this.faceDetection.ready) return
 
 				// Run detection
 				this.faceDetection.detect()
@@ -103,6 +105,14 @@ export default class Camera {
 					}
 					// Emit detectioj position
 					Events.$emit('detected', pos)
+				} else {
+					// After m seconds we had lost the detection, set idle mode
+					if (this.timer >= this.timerInterval) {
+						Events.$emit('lost-detection', null)
+						this.timer = 0
+					} else {
+						this.timer++
+					}
 				}
 			}
 
@@ -148,7 +158,7 @@ export default class Camera {
 	}
 
 	startDetection() {
-		// If the variable didn't exit, initialize the faceDection class
+		// If the variable didn't exit, initialize faceDection
 		if (!this.faceDetection) {
 			this.detectFaces = true
 			this.initDetection()

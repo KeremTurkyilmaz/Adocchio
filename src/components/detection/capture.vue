@@ -54,7 +54,8 @@ export default {
     this.camera = new Camera({
       canvas: this.canvas,
       flip: this.$config.flip,
-      captureVideo: this.$config.captureVideo,
+			captureVideo: this.$config.captureVideo,
+			timerInterval: this.$config.timerInterval,
       detectFaces: this.$config.detectFaces,
       detection: this.$config.detection,
       input: {
