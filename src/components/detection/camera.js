@@ -74,7 +74,9 @@ export default class Camera {
 			this.ctx.restore()
 
 			// Detect faces
-			if (this.detectFaces) {
+			if (this.detectFaces && this.faceDetection) {
+				// If the detection isn't ready return
+				if(!this.faceDetection.ready) return
 				this.faceDetection.detect()
 				this.faces = []
 
