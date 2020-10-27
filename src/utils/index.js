@@ -5,9 +5,9 @@ export const resize = (el, w, h) => {
 }
 
 // Resize a DOM element through css
-export const resizeCSS = (el, s) => {
-	el.style.width = el.width * s + 'px'
-	el.style.height = el.height * s + 'px'
+export const resizeCSS = (el, w, h) => {
+	el.style.width = w + 'px'
+	el.style.height = h + 'px'
 }
 
 // Returns a number whose value is limited to the given range.
