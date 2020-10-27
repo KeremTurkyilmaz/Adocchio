@@ -90,3 +90,7 @@ export const rgba_to_grayscale = (rgba, nrows, ncols) => {
 	}
 	return gray
 }
+
+export const secondsToFrames = (s) => {
+	return s * 60
+}
