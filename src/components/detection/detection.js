@@ -44,17 +44,28 @@ export default class Detection {
 	detect() {
 		try {
 			// Pico.js
+
+			// Get context
 			const ctx = this.canvas.getContext('2d')
+
+			// Copy the pixel data
 			const rgba = ctx.getImageData(0, 0, this.canvas.width, this.canvas.height).data
+
+			// Image Params
 			const image = {
 				pixels: rgba_to_grayscale(rgba, this.canvas.height, this.canvas.width),
 				nrows: this.canvas.height,
 				ncols: this.canvas.width,
 				ldim: this.canvas.width
 			}
+
+			// Detection
 			let dets = this.Pico.run_cascade(image, this.model, this.params.detection)
+
+			// Detection
 			dets = this.memory(dets)
 			dets = this.Pico.cluster_detections(dets, 0.2)
+
 			for (let i = 0; i < dets.length; ++i) {
 				const face = dets[i]
 				if (face[3] > 50.0) {
