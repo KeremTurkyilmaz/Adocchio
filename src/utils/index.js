@@ -80,3 +80,13 @@ export const calculateGrid = (options = {}) => {
 		origins
 	}
 }
+
+export const rgba_to_grayscale = (rgba, nrows, ncols) => {
+	const gray = new Uint8Array(nrows * ncols)
+	for (var r = 0; r < nrows; ++r) {
+		for (var c = 0; c < ncols; ++c) {
+			gray[r * ncols + c] = (2 * rgba[r * 4 * ncols + 4 * c + 0] + 7 * rgba[r * 4 * ncols + 4 * c + 1] + 1 * rgba[r * 4 * ncols + 4 * c + 2]) / 10
+		}
+	}
+	return gray
+}
