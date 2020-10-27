@@ -77,7 +77,11 @@ export default class Camera {
 			if (this.detectFaces && this.faceDetection) {
 				// If the detection isn't ready return
 				if(!this.faceDetection.ready) return
+
+				// Run detection
 				this.faceDetection.detect()
+
+				// Empty faces list
 				this.faces = []
 
 				// For each face, draw its box
@@ -88,6 +92,8 @@ export default class Camera {
 				// Draw and Emit only if we have more than one face
 				if (this.faces.length) {
 					const face = this.faces[0]
+
+					// Draw only the first face
 					this.drawFace(face)
 
 					// Map detection values with window size
@@ -95,7 +101,7 @@ export default class Camera {
 						x: map(face.center.x, 0, this.canvas.width, 0, window.innerWidth),
 						y: map(face.center.y, 0, this.canvas.height, 0, window.innerHeight)
 					}
-
+					// Emit detectioj position
 					Events.$emit('detected', pos)
 				}
 			}
