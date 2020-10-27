@@ -11,12 +11,12 @@ Vue.prototype.$config = {
 	flip: true,
 	interval: 1,
 	detection: {
-		w: 384,
-		h: 216
+		w: 640,
+		h: 380
 	},
 	input: {
-		w: 768,
-		h: 432
+		w: 640,
+		h: 380
 	}
 }
 
