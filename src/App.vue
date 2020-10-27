@@ -22,6 +22,8 @@ export default {
 	position: absolute;
 	width: 50%;
 	top: 0;
-	right: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	opacity: 0.8;
 }
 </style>
