@@ -11,7 +11,7 @@ const defaultParams = {
 		maxsize: 1000, // maximum size of a face
 		scalefactor: 1.1 // for multiscale processing: resize the detection window by 10% when moving to the higher scale
 	},
-	// It works best with small values
+	// It's work better with small values
 	memory: 10 // we will use the detecions of the last n frames
 }
 
