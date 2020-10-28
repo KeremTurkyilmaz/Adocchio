@@ -21,7 +21,7 @@ export default class Eye {
 
 		// Load all sprites
 		this.eye_open = this.loadImage('sprites', `eye.png`)
-		this.eye_closed = this.loadImage('sprites', `closed.png`)
+		this.eye_closed = this.loadImage('sprites', `eye_closed.png`)
 		this.iris = this.loadImage('sprites', `iris.png`)
 		this.pupil = this.loadImage('sprites', `pupil.png`)
 
