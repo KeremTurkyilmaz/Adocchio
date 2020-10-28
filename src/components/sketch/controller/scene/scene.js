@@ -88,7 +88,7 @@ export default class Scene {
 		// Set scene mode -> 'detection' or 'idle'
 		console.log('Update scene mode ' + mode)
 		this.mode = mode
-		this.toggleEyesBehavior()
+		// this.toggleEyesBehavior()
 	}
 
 	set updateCoordinates(coord) {
