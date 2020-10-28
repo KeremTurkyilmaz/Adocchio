@@ -78,6 +78,7 @@ export default class Detection {
 					this._faces = results
 				}
 			} else {
+				// When detection is lost, set faces list as an empty array
 				this._faces = []
 			}
 		} catch (e) {
