@@ -103,7 +103,7 @@ export default class Camera {
 						x: map(face.center.x, 0, this.canvas.width, 0, window.innerWidth),
 						y: map(face.center.y, 0, this.canvas.height, 0, window.innerHeight)
 					}
-					// Emit detectioj position
+					// Emit detection position
 					Events.$emit('detected', pos)
 				} else {
 					// After m seconds we had lost the detection, set idle mode
@@ -123,6 +123,7 @@ export default class Camera {
 		}
 	}
 
+	// Draw face bounding box
 	drawFace(face) {
 		this.ctx.save()
 		this.ctx.lineWidth = '2'
