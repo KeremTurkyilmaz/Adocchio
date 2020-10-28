@@ -66,8 +66,8 @@ export default class Detection {
 			dets = this.memory(dets)
 			dets = this.Pico.cluster_detections(dets, 0.2)
 
-			for (let i = 0; i < dets.length; ++i) {
-				const face = dets[i]
+			if (dets.length) {
+				const face = dets[0]
 				if (face[3] > 50.0) {
 					let results = []
 					// Push into results array a normalized face object
@@ -77,6 +77,8 @@ export default class Detection {
 					// Update faces array
 					this._faces = results
 				}
+			} else {
+				this._faces = []
 			}
 		} catch (e) {
 			console.error('Face detection failed:', e)
