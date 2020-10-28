@@ -98,7 +98,7 @@ export default class Camera {
 					// Draw only the first face
 					this.drawFace(face)
 
-					// Map detection values with window size
+					// Map detection values
 					const pos = {
 						x: map(face.center.x, 0, this.canvas.width, 0, window.innerWidth),
 						y: map(face.center.y, 0, this.canvas.height, 0, window.innerHeight)
