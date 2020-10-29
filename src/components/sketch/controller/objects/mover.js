@@ -14,12 +14,6 @@ export default class Mover {
 			x: Math.round(Math.random() * 9) + 1,
 			y: Math.round(Math.random() * 9) + 1
 		}
-
-		// setInterval(() => {
-		// 	console.log('Update Trajectory')
-		// 	this.updateTrajectory();
-		// }, 5000)
-
 	}
 
 	updateTrajectory() {
