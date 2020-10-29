@@ -19,6 +19,8 @@ export default class Eye {
 			y: this.origin.y + this.radius / 2
 		}
 
+		this.moverId = options.moverId
+
 		// Load all sprites
 		this.eye_open = this.loadImage('sprites', `eye.png`)
 		this.eye_closed = this.loadImage('sprites', `eye_closed.png`)

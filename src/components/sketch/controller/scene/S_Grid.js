@@ -1,4 +1,4 @@
-import { calculateGrid } from '@/utils'
+import { calculateGrid, random } from '@/utils'
 
 import Scene from './scene'
 import Eye from '../objects/eye'
@@ -23,10 +23,14 @@ export default class S_Grid extends Scene {
 		// Loop trought rows and columns
 		for (let j = 0; j < this.grid.rows; j++) {
 			for (let i = 0; i < this.grid.cols; i++) {
+				// Associated mover
+				const moverId = random(0, this.movers.length - 1)
+
 				// Add eye to the eyes list
 				this.eyes.push(
 					// Create new eye
 					new Eye({
+						moverId,
 						ctx: this.ctx,
 						origin: {
 							x: i * this.modulo + this.grid.pad.x * (i + 1),
@@ -39,4 +43,3 @@ export default class S_Grid extends Scene {
 		}
 	}
 }
-
