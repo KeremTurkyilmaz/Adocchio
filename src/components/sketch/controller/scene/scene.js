@@ -40,10 +40,9 @@ export default class Scene {
 		this.frameCount++
 
 		if (this.mode === 'idle') {
-			// Update mover
-			this.mover.update(this.frameCount * 0.002)
-			//  Get mover position during Idle mode
-			this.moverCoordinates = this.mover.position
+			this.movers.forEach(mover => {
+				mover.update(this.frameCount * 0.001)
+			})
 		}
 	}
 
