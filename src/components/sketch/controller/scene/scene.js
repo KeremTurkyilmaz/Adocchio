@@ -56,7 +56,11 @@ export default class Scene {
 		// Detection coordinates
 		if (this.mode === 'detection') drawDot(this.ctx, this.coordinates)
 		// Draw mover
-		if (this.mode === 'idle') drawDot(this.ctx, this.moverCoordinates)
+		if (this.mode === 'idle') {
+			this.movers.forEach(mover => {
+				drawDot(this.ctx, mover.position)
+			})
+		}
 	}
 
 	post() {
