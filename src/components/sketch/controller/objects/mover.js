@@ -1,5 +1,6 @@
 export default class Mover {
-	constructor() {
+	constructor(options = {}) {
+		this.id = options.id
 		this.bounds = {
 			w: window.innerWidth,
 			h: window.innerHeight
