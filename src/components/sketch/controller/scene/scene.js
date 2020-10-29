@@ -17,7 +17,12 @@ export default class Scene {
 			x: this.center.x,
 			y: this.center.y
 		}
-		this.mover = new Mover()
+
+		this.movers = []
+		for (let i = 0; i < 10; i++) {
+			const mover = new Mover({ id: i })
+			this.movers.push(mover)
+		}
 		this.eyesTimeout = null
 	}
 
