@@ -23,6 +23,7 @@ export default class Scene {
 			const mover = new Mover({ id: i })
 			this.movers.push(mover)
 		}
+
 		this.eyesTimeout = null
 	}
 
@@ -49,7 +50,13 @@ export default class Scene {
 	render() {
 		this.eyes.forEach(eye => {
 			if (this.mode === 'detection') eye.follow(this.coordinates)
-			if (this.mode === 'idle') eye.follow(this.moverCoordinates)
+			if (this.mode === 'idle') {
+				this.movers.forEach(mover => {
+					if (eye.moverId === mover.id) {
+						eye.follow(mover.position)
+					}
+				})
+			}
 			eye.render()
 		})
 
