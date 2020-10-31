@@ -6,7 +6,6 @@ export default class Controller {
 		this.options = options
 		this.canvas = options.canvas
 		this.animate = options.animate
-		this.currentScene = 0
 	}
 
 	init() {
@@ -22,6 +21,15 @@ export default class Controller {
 		this.canvas.style.width = this.bounds.w + 'px'
 		this.canvas.style.height = this.bounds.h + 'px'
 
+		/*
+		 * --------------------
+		 * Scene setup
+		 * --------------------
+		 */
+
+		// Current Scene
+		this.currentScene = 0
+
 		// Options object to be pass to the scene class
 		this.options = {
 			ctx: this.ctx,
@@ -35,12 +43,12 @@ export default class Controller {
 		this.scenes.push(new S_Grid(this.options))
 
 		// Init scene
-		this.setScene()
+		this.setScene(this.currentScene)
 	}
 
-	setScene() {
-		console.log('Init Scene nr.' + this.currentScene)
-		this.scene = this.scenes[this.currentScene]
+	setScene(index) {
+		console.log('Init Scene nr.' + index)
+		this.scene = this.scenes[index]
 		this.scene.init()
 	}
 
