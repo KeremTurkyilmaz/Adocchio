@@ -51,6 +51,11 @@ export default class Controller {
 	setScene(index) {
 		console.log('Init Scene nr.' + index)
 		this.scene = this.scenes[index]
+
+		// Launch Shared scene setup
+		this.scene.setup()
+
+		// Launch Custom scene init
 		this.scene.init()
 	}
 

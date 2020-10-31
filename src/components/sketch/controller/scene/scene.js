@@ -7,8 +7,11 @@ export default class Scene {
 		this.ctx = options.ctx
 		this.bounds = options.bounds
 		this.debug = options.debug
+	}
+
+	setup() {
 		this.frameCount = 0
-		this.mode = 'detection'
+		this.mode = 'idle'
 		this.eyes = []
 		this.center = {
 			x: window.innerWidth / 2,
@@ -18,9 +21,9 @@ export default class Scene {
 			x: this.center.x,
 			y: this.center.y
 		}
-
 		this.movers = []
-		for (let i = 0; i < 10; i++) {
+		const moversNum = 20
+		for (let i = 0; i < moversNum; i++) {
 			const mover = new Mover({ id: i })
 			this.movers.push(mover)
 		}
@@ -42,7 +45,7 @@ export default class Scene {
 		// Update movers only on idle mode
 		if (this.mode === 'idle') {
 			this.movers.forEach(mover => {
-				mover.update(this.frameCount * 0.001)
+				mover.update(this.frameCount * 0.004)
 			})
 		}
 	}
