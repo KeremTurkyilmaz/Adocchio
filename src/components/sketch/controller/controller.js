@@ -4,6 +4,7 @@ export default class Controller {
 	constructor(options = {}) {
 		console.log('Initialize Controller', options)
 		this.options = options
+		this.debug = options.debug
 		this.canvas = options.canvas
 		this.animate = options.animate
 	}
@@ -33,7 +34,8 @@ export default class Controller {
 		// Options object to be pass to the scene class
 		this.options = {
 			ctx: this.ctx,
-			bounds: this.bounds
+			bounds: this.bounds,
+			debug: this.debug
 		}
 
 		// List of scenes

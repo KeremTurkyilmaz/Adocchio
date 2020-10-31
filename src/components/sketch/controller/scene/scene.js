@@ -6,6 +6,7 @@ export default class Scene {
 		this.options = options
 		this.ctx = options.ctx
 		this.bounds = options.bounds
+		this.debug = options.debug
 		this.frameCount = 0
 		this.mode = 'detection'
 		this.eyes = []
@@ -60,19 +61,24 @@ export default class Scene {
 			eye.render()
 		})
 
-		// Detection coordinates
-		if (this.mode === 'detection') drawDot(this.ctx, this.coordinates)
-		// Draw mover
-		if (this.mode === 'idle') {
-			this.movers.forEach(mover => {
-				drawDot(this.ctx, mover.position)
-			})
+		// Draw dots only on debug mode
+		if (this.debug) {
+			// Detection coordinates
+			if (this.mode === 'detection') drawDot(this.ctx, this.coordinates)
+			// Draw mover
+			if (this.mode === 'idle') {
+				this.movers.forEach(mover => {
+					drawDot(this.ctx, mover.position)
+				})
+			}
 		}
 	}
 
 	post() {
 		// Display current frame
-		this.ctx.fillText(this.frameCount, 10, 20)
+		if (this.debug) {
+			this.ctx.fillText(this.frameCount, 10, 20)
+		}
 
 		// Restore context state
 		this.ctx.restore()

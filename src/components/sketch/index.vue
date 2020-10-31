@@ -14,8 +14,12 @@ export default {
     // Canvas reference
     this.canvas = this.$refs.canvas
 
+    // Check for debug mode
+    this.debug = this.$config.debug
+
     // Create new controller
     this.controller = new Controller({
+      debug: this.debug,
       animate: true,
       canvas: this.canvas
     })
