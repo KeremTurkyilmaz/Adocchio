@@ -93,6 +93,9 @@ export default class Camera {
 
 				// Draw and Emit only if we have more than one face
 				if (this.faces.length) {
+					// Reset timer
+					this.timer = 0
+
 					const face = this.faces[0]
 
 					// Draw only the first face
@@ -109,7 +112,6 @@ export default class Camera {
 					// After m seconds we had lost the detection, set idle mode
 					if (this.timer >= this.timerInterval) {
 						Events.$emit('lost-detection', null)
-						this.timer = 0
 					} else {
 						this.timer++
 					}
