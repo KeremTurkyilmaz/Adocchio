@@ -83,16 +83,17 @@ export default {
 
 <style lang="scss" scoped>
 .capture {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  &.debug {
+    opacity: 1;
+  }
   .controls {
     display: flex;
     flex-direction: row;
-    width: 50%;
     justify-content: center;
     align-items: center;
     background-color: $col-white;
