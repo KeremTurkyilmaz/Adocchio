@@ -1,5 +1,5 @@
 <template>
-  <div class="capture">
+  <div class="capture" :class="{ debug }">
     <video ref="input" autoplay muted playsinline></video>
     <div class="controls">
       <p
@@ -42,6 +42,7 @@ export default {
   name: 'Capture',
   data() {
     return {
+      debug: null,
       pausedVideo: false,
       pausedDetection: null,
       positions: []
@@ -50,6 +51,7 @@ export default {
   mounted() {
     this.canvas = this.$refs.canvas
     this.input = this.$refs.input
+    this.debug = this.$config.debug
 
     this.camera = new Camera({
       canvas: this.canvas,
