@@ -109,10 +109,13 @@ export default class Camera {
 					// Emit detection position
 					Events.$emit('detected', pos)
 				} else {
-					// After m seconds we had lost the detection, set idle mode
+					// After N seconds we had lost the detection, set idle mode
+					// Check if the timer has passed the timerInterval defined in
+					// the main config file
 					if (this.timer >= this.timerInterval) {
 						Events.$emit('lost-detection', null)
 					} else {
+						// Increment timer
 						this.timer++
 					}
 				}
