@@ -35,11 +35,10 @@ export default class Scene {
 	}
 
 	update() {
-		if (!this.eyes) return
-
 		// Increment frameCount
 		this.frameCount++
 
+		// Update movers only on idle mode
 		if (this.mode === 'idle') {
 			this.movers.forEach(mover => {
 				mover.update(this.frameCount * 0.001)
@@ -48,6 +47,7 @@ export default class Scene {
 	}
 
 	render() {
+		// Eyes update and render
 		this.eyes.forEach(eye => {
 			if (this.mode === 'detection') eye.follow(this.coordinates)
 			if (this.mode === 'idle') {
