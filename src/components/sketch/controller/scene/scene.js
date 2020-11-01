@@ -50,10 +50,13 @@ export default class Scene {
 		}
 	}
 
-	render() {
+	render(debug) {
 		// Eyes update and render
 		this.eyes.forEach(eye => {
+			// Eye follow the detection coordinates
 			if (this.mode === 'detection') eye.follow(this.coordinates)
+
+			// Eye follow it's own movers
 			if (this.mode === 'idle') {
 				this.movers.forEach(mover => {
 					if (eye.moverId === mover.id) {
@@ -61,7 +64,8 @@ export default class Scene {
 					}
 				})
 			}
-			eye.render()
+			// Render eye
+			eye.render(debug)
 		})
 
 		// Draw dots only on debug mode

@@ -63,7 +63,7 @@ export default class Controller {
 		if (this.animate) {
 			this.scene.pre()
 			this.scene.update()
-			this.scene.render()
+			this.scene.render(this.debug)
 			this.scene.post()
 			requestAnimationFrame(() => this.draw())
 		} else {

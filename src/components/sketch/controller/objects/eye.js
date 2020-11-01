@@ -1,7 +1,5 @@
 import { resize } from '@/utils'
 
-const debug = false
-
 export default class Eye {
 	constructor(options = {}) {
 		// Eyr origin
@@ -72,7 +70,7 @@ export default class Eye {
 		this.isClosed = val
 	}
 
-	render() {
+	render(debug) {
 		if (!this.isClosed) {
 			// Eye
 			this.ctx.save()

@@ -5,10 +5,10 @@ import './assets/styles/main.scss'
 Vue.config.productionTip = false
 
 Vue.prototype.$config = {
-	debug: true,
-	followMouse: false,
-	detectFaces: false,
+	debug: false,
+	detectFaces: true,
 	captureVideo: true,
+	followMouse: false,
 	flip: true,
 	interval: 1,
 	timerInterval: 5, // Seconds
