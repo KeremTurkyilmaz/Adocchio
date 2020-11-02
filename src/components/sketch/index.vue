@@ -24,6 +24,11 @@ export default {
       canvas: this.canvas
     })
 
+    window.addEventListener('resize', () => {
+	  this.controller.init()
+	  this.controller.draw()
+    })
+
     // Init the controller
     this.controller.init()
 
