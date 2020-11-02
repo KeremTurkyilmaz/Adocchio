@@ -59,22 +59,37 @@ export default class Controller {
 		this.scene.init()
 	}
 
+	// Draw scene
 	draw() {
 		if (this.animate) {
+			// Clear and save context
 			this.scene.pre()
+
+			// Update scene
 			this.scene.update()
+
+			// Render scene
 			this.scene.render(this.debug)
+
+			// Restore context and draw frameCount
 			this.scene.post()
+
+			// Recall draw function
 			requestAnimationFrame(() => this.draw())
 		} else {
+			// Clear scene
 			this.scene.clear()
+			// Delete the animation frame
 			window.cancelAnimationFrame(this.draw)
 		}
 	}
 
 	calculateBounds() {
+		// Get canvas parent
 		const container = this.canvas.parentNode
+		// Get parent bounds
 		const containerSize = container.getBoundingClientRect()
+		// Create a custom object with some properties
 		return {
 			x: containerSize.x,
 			y: containerSize.y,
@@ -88,12 +103,17 @@ export default class Controller {
 	}
 
 	stop() {
+		// Stop animation
 		this.animate = false
+		// Clear the canvas
 		this.ctx.clearRect(0, 0, this.bounds.w, this.bounds.h)
 	}
 
 	start() {
+		// Start Animation
 		this.animate = true
+
+		// Invoce draw function
 		this.draw()
 	}
 }

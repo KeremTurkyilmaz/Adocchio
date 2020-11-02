@@ -24,6 +24,7 @@ export default {
       canvas: this.canvas
     })
 
+	// Add resize event, fit canvas to the current window size
     window.addEventListener('resize', () => {
 	  this.controller.init()
 	  this.controller.draw()

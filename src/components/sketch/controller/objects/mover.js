@@ -8,12 +8,12 @@ export default class Mover {
 		this.pos = { x: 0, y: 0 }
 
 		this.range = {
-			x: this.bounds.w / 2.2,
-			y: this.bounds.h / 2.2
+			x: this.bounds.w / 2,
+			y: this.bounds.h / 2
 		}
 		this.limit = {
-			x: Math.round(Math.random() * 9) + 1,
-			y: Math.round(Math.random() * 9) + 1
+			x: Math.round(Math.random() * 9) + Math.random(),
+			y: Math.round(Math.random() * 9) + Math.random()
 		}
 	}
 

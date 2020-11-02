@@ -21,11 +21,10 @@ export default class Scene {
 			x: this.center.x,
 			y: this.center.y
 		}
+		// Create n random movers
 		this.movers = []
-		const moversNum = 20
-		for (let i = 0; i < moversNum; i++) {
-			const mover = new Mover({ id: i })
-			this.movers.push(mover)
+		for (let i = 0; i < 20; i++) {
+			this.movers.push(new Mover({ id: i }))
 		}
 
 		this.eyesTimeout = null
@@ -45,7 +44,7 @@ export default class Scene {
 		// Update movers only on idle mode
 		if (this.mode === 'idle') {
 			this.movers.forEach(mover => {
-				mover.update(this.frameCount * 0.004)
+				mover.update(this.frameCount * 0.0015)
 			})
 		}
 	}
