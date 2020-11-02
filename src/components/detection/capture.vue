@@ -91,7 +91,7 @@ export default {
   transform: translate(-50%, -50%);
   opacity: 0;
   &.debug {
-    opacity: 1;
+    opacity: 0.5;
   }
   .controls {
     display: flex;
