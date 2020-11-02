@@ -19,6 +19,7 @@ export default {
 
     // Create new controller
     this.controller = new Controller({
+      damp: this.$config.damp,
       debug: this.debug,
       animate: true,
       canvas: this.canvas

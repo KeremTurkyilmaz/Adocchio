@@ -7,6 +7,7 @@ export default class Controller {
 		this.debug = options.debug
 		this.canvas = options.canvas
 		this.animate = options.animate
+		this.damp = options.damp
 	}
 
 	init() {
@@ -33,6 +34,7 @@ export default class Controller {
 
 		// Options object to be pass to the scene class
 		this.options = {
+			damp: this.damp,
 			ctx: this.ctx,
 			bounds: this.bounds,
 			debug: this.debug

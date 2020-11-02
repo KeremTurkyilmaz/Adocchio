@@ -5,6 +5,7 @@ import './assets/styles/main.scss'
 Vue.config.productionTip = false
 
 Vue.prototype.$config = {
+	damp: 0.05,
 	debug: false,
 	detectFaces: true,
 	captureVideo: true,

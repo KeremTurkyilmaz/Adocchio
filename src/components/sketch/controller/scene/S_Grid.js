@@ -9,6 +9,7 @@ export default class S_Grid extends Scene {
 		this.ctx = options.ctx
 		this.bounds = options.bounds
 		this.debug = options.debug
+		this.damp = options.damp
 	}
 
 	init() {

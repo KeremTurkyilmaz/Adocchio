@@ -7,11 +7,12 @@ export default class Scene {
 		this.ctx = options.ctx
 		this.bounds = options.bounds
 		this.debug = options.debug
+		this.damp = options.damp
 	}
 
 	setup() {
 		this.frameCount = 0
-		this.mode = 'idle'
+		this.mode = 'detection'
 		this.eyes = []
 		this.center = {
 			x: window.innerWidth / 2,
@@ -119,9 +120,16 @@ export default class Scene {
 	}
 
 	set updateCoordinates(coord) {
+		// Calculate new destination
+		const des = {
+			x: coord.x - this.coordinates.x,
+			y: coord.y - this.coordinates.y
+		}
+		// Interpolation with damping
+		this.coordinates.x += des.x * this.damp
+		this.coordinates.y += des.y * this.damp
 		// If the coordinates are the same, return
-		if (this.coordinates === coord) return
-		this.coordinates = coord
+		// if (this.coordinates === coord) return
 	}
 }
 
