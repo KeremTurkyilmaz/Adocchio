@@ -44,7 +44,6 @@ export default class Detection {
 	detect() {
 		try {
 			// Pico.js
-
 			// Get context
 			const ctx = this.canvas.getContext('2d')
 
