@@ -6,7 +6,6 @@ export default class Controller {
 		this.options = options
 		this.canvas = options.canvas
 		this.animate = options.animate
-		
 	}
 
 	init() {
@@ -37,8 +36,6 @@ export default class Controller {
 			ctx: this.ctx,
 			bounds: this.bounds
 		}
-
-		console.log(this.options, '...')
 
 		// List of scenes
 		this.scenes = []
