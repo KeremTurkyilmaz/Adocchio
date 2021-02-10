@@ -4,10 +4,9 @@ export default class Controller {
 	constructor(options = {}) {
 		console.log('Initialize Controller', options)
 		this.options = options
-		this.debug = options.debug
 		this.canvas = options.canvas
 		this.animate = options.animate
-		this.damp = options.damp
+		
 	}
 
 	init() {
@@ -34,11 +33,12 @@ export default class Controller {
 
 		// Options object to be pass to the scene class
 		this.options = {
-			damp: this.damp,
+			...this.options,
 			ctx: this.ctx,
-			bounds: this.bounds,
-			debug: this.debug
+			bounds: this.bounds
 		}
+
+		console.log(this.options, '...')
 
 		// List of scenes
 		this.scenes = []
@@ -71,7 +71,7 @@ export default class Controller {
 			this.scene.update()
 
 			// Render scene
-			this.scene.render(this.debug)
+			this.scene.render(this.options.debug)
 
 			// Restore context and draw frameCount
 			this.scene.post()
