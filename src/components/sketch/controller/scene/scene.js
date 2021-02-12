@@ -5,8 +5,6 @@ export default class Scene {
 		this.options = options
 		this.ctx = options.ctx
 		this.bounds = options.bounds
-		this.debug = options.debug
-		this.damp = options.damp
 	}
 
 	setup() {
@@ -68,7 +66,7 @@ export default class Scene {
 		})
 
 		// Draw dots only on debug mode
-		if (this.debug) {
+		if (debug) {
 			// Detection coordinates
 			if (this.mode === 'detection') drawDot(this.ctx, this.coordinates)
 			// Draw mover
@@ -80,9 +78,9 @@ export default class Scene {
 		}
 	}
 
-	post() {
+	post(debug) {
 		// Display current frame
-		if (this.debug) {
+		if (debug) {
 			this.ctx.fillText(this.frameCount, 10, 20)
 		}
 

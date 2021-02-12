@@ -22,7 +22,6 @@ export default class Camera {
 			y: this.input.h / 2
 		}
 		this.setup()
-		this.frameCount = 0
 	}
 
 	setup() {
@@ -120,9 +119,6 @@ export default class Camera {
 					}
 				}
 			}
-
-			// Update frameCount
-			this.frameCount++
 
 			requestAnimationFrame(() => this.update())
 		}

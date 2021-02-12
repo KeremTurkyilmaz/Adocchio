@@ -21,7 +21,6 @@ export default class Eye {
 
 		// Load all sprites
 		this.eye_open = this.loadImage('sprites', `eye.png`)
-		this.eye_closed = this.loadImage('sprites', `eye_closed.png`)
 		this.iris = this.loadImage('sprites', `iris.png`)
 		this.pupil = this.loadImage('sprites', `pupil.png`)
 
@@ -34,9 +33,6 @@ export default class Eye {
 
 		//
 		this.iris_r = this.radius * Math.cos(this.iris_arc)
-
-		// Check if the eye is closed
-		this.isClosed = false
 
 		// Pos
 		this.pos = { x: 0, y: 0 }
@@ -66,42 +62,30 @@ export default class Eye {
 		// if (this.eye_angle > radians(90) - this.iris_arc) this.eye_angle = radians(90) - this.iris_arc
 	}
 
-	set closeEye(val) {
-		this.isClosed = val
-	}
-
 	render(debug) {
-		if (!this.isClosed) {
-			// Eye
-			this.ctx.save()
-			this.ctx.translate(this.center.x, this.center.y)
-			this.ctx.drawImage(this.eye_open, -this.eye_open.width / 2, -this.eye_open.height / 2, this.eye_open.width, this.eye_open.height)
-			this.ctx.restore()
+		// Eye
+		this.ctx.save()
+		this.ctx.translate(this.center.x, this.center.y)
+		this.ctx.drawImage(this.eye_open, -this.eye_open.width / 2, -this.eye_open.height / 2, this.eye_open.width, this.eye_open.height)
+		this.ctx.restore()
 
-			this.ctx.save()
-			this.ctx.translate(this.center.x, this.center.y)
-			this.ctx.rotate(this.angle)
-			this.ctx.scale(0.8, 0.8)
+		this.ctx.save()
+		this.ctx.translate(this.center.x, this.center.y)
+		this.ctx.rotate(this.angle)
+		this.ctx.scale(0.8, 0.8)
 
-			// Iris
-			this.ctx.save()
-			this.ctx.translate(this.pos.x, this.pos.y)
-			this.ctx.drawImage(this.iris, -this.iris_radius / 2, -this.iris_radius / 2, this.iris_radius * Math.cos(this.eye_angle), this.iris_radius)
-			this.ctx.restore()
+		// Iris
+		this.ctx.save()
+		this.ctx.translate(this.pos.x, this.pos.y)
+		this.ctx.drawImage(this.iris, -this.iris_radius / 2, -this.iris_radius / 2, this.iris_radius * Math.cos(this.eye_angle), this.iris_radius)
+		this.ctx.restore()
 
-			// Pupil
-			this.ctx.save()
-			this.ctx.translate(this.pos.x, this.pos.y)
-			this.ctx.drawImage(this.pupil, -this.pupil_radius / 2, -this.pupil_radius / 2, this.pupil_radius * Math.cos(this.eye_angle), this.pupil_radius)
-			this.ctx.restore()
-			this.ctx.restore()
-		} else {
-			// Draw closed eye
-			this.ctx.save()
-			this.ctx.translate(this.center.x, this.center.y)
-			this.ctx.drawImage(this.eye_closed, -this.eye_closed.width / 2, -this.eye_closed.height / 2, this.eye_closed.width, this.eye_closed.height)
-			this.ctx.restore()
-		}
+		// Pupil
+		this.ctx.save()
+		this.ctx.translate(this.pos.x, this.pos.y)
+		this.ctx.drawImage(this.pupil, -this.pupil_radius / 2, -this.pupil_radius / 2, this.pupil_radius * Math.cos(this.eye_angle), this.pupil_radius)
+		this.ctx.restore()
+		this.ctx.restore()
 
 		if (debug) {
 			this.ctx.strokeStyle = 'gray'

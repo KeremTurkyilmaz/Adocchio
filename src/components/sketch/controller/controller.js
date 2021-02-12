@@ -71,10 +71,10 @@ export default class Controller {
 			this.scene.render(this.options.debug)
 
 			// Restore context and draw frameCount
-			this.scene.post()
+			this.scene.post(this.options.debug)
 
 			// Recall draw function
-			requestAnimationFrame(() => this.draw())
+			window.requestAnimationFrame(() => this.draw())
 		} else {
 			// Clear scene
 			this.scene.clear()
@@ -106,6 +106,10 @@ export default class Controller {
 		this.animate = false
 		// Clear the canvas
 		this.ctx.clearRect(0, 0, this.bounds.w, this.bounds.h)
+	}
+
+	set updateOptions(params = {}) {
+		this.options[params.key] = params.value
 	}
 
 	start() {
