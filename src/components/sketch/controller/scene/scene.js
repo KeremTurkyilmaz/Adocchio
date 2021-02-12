@@ -1,11 +1,7 @@
 import Mover from '../objects/mover'
 
 export default class Scene {
-	constructor(options = {}) {
-		this.options = options
-		this.ctx = options.ctx
-		this.bounds = options.bounds
-	}
+	constructor() {}
 
 	setup() {
 		this.frameCount = 0

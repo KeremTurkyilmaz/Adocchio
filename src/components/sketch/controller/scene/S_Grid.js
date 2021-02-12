@@ -6,9 +6,10 @@ import Eye from '../objects/eye'
 export default class S_Grid extends Scene {
 	constructor(options = {}) {
 		super()
+		this.options = options
 		this.ctx = options.ctx
 		this.bounds = options.bounds
-		this.damp = options.damp;
+		this.damp = options.damp
 	}
 
 	init() {
