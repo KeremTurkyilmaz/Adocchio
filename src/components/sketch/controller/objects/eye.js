@@ -1,5 +1,7 @@
 import { resize } from '@/utils'
 
+const scale = 0.88
+
 export default class Eye {
 	constructor(options = {}) {
 		// Eyr origin
@@ -66,13 +68,14 @@ export default class Eye {
 		// Eye
 		this.ctx.save()
 		this.ctx.translate(this.center.x, this.center.y)
+		this.ctx.scale(scale, scale)
 		this.ctx.drawImage(this.eye_open, -this.eye_open.width / 2, -this.eye_open.height / 2, this.eye_open.width, this.eye_open.height)
 		this.ctx.restore()
 
 		this.ctx.save()
 		this.ctx.translate(this.center.x, this.center.y)
 		this.ctx.rotate(this.angle)
-		this.ctx.scale(0.8, 0.8)
+		this.ctx.scale(scale*0.8, scale*0.8)
 
 		// Iris
 		this.ctx.save()
