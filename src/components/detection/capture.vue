@@ -1,18 +1,12 @@
 <template>
-  <div class="capture" :class="{ debug }">
+  <div class="capture" :class="{ debug: config.debug }">
     <video ref="input" autoplay muted playsinline></video>
     <div class="controls">
-      <p v-show="pausedVideo" :class="{ paused: pausedVideo }" @click.prevent="toggleCamera(true)">
-        Start Camera
+      <p :class="{ paused: pausedVideo }" @click="toggleCamera()">
+        {{ pausedVideo ? 'Start Camera' : 'Stop Camera' }}
       </p>
-      <p v-show="!pausedVideo" :class="{ paused: !pausedVideo }" @click.prevent="toggleCamera(false)">
-        Stop Camera
-      </p>
-      <p v-show="pausedDetection" :class="{ paused: pausedDetection }" @click.prevent="toggleDetection(true)">
-        Start Detection
-      </p>
-      <p v-show="!pausedDetection" :class="{ paused: !pausedDetection }" @click.prevent="toggleDetection(false)">
-        Stop Detection
+      <p :class="{ paused: pausedDetection }" @click="toggleDetection()">
+        {{ pausedDetection ? 'Start Detection' : 'Stop Detection' }}
       </p>
     </div>
     <canvas ref="canvas"></canvas>
@@ -25,42 +19,44 @@ export default {
 	name: 'Capture',
 	data() {
 		return {
-			debug: null,
 			pausedVideo: false,
-			pausedDetection: null,
-			positions: []
+			pausedDetection: false
+		}
+	},
+	computed: {
+		config() {
+			return this.$store.getters.config
 		}
 	},
 	mounted() {
 		this.canvas = this.$refs.canvas
 		this.input = this.$refs.input
-		this.debug = this.$config.debug
 
+		// Config
+		this.pausedDetection = !this.config.detectFaces // Boolean
+
+		// Init Camera
 		this.camera = new Camera({
 			canvas: this.canvas,
-			flip: this.$config.flip,
-			captureVideo: this.$config.captureVideo,
-			timerInterval: this.$config.timerInterval,
-			detectFaces: this.$config.detectFaces,
-			detection: this.$config.detection,
+			flip: this.config.flip,
+			captureVideo: this.config.captureVideo,
+			timerInterval: this.config.timerInterval,
+			detectFaces: this.config.detectFaces,
+			detection: this.config.detection,
 			input: {
 				el: this.input,
-				...this.$config.input
+				...this.config.input
 			}
 		})
-		this.captureVideo = this.$config.captureVideo
-		this.pausedDetection = !this.$config.detectFaces // Boolean
 	},
 	methods: {
 		toggleCamera() {
 			this.pausedVideo = !this.pausedVideo
-			if (this.pausedVideo) this.camera.stopCapture()
-			else this.camera.startCapture()
+			this.pausedVideo ? this.camera.stopCapture() : this.camera.startCapture()
 		},
 		toggleDetection() {
 			this.pausedDetection = !this.pausedDetection
-			if (this.pausedDetection) this.camera.stopDetection()
-			else this.camera.startDetection()
+			this.pausedDetection ? this.camera.stopDetection() : this.camera.startDetection()
 		}
 	}
 }

@@ -10,9 +10,9 @@ import Controller from './controller/controller'
 
 export default {
 	name: 'Sketch',
-	data() {
-		return {
-			controller: {}
+	computed: {
+		config(){
+			return this.$store.getters.config
 		}
 	},
 	mounted() {
@@ -21,8 +21,8 @@ export default {
 
 		// Create new controller
 		this.controller = new Controller({
-			damp: this.$config.damp,
-			debug: this.$config.debug,
+			damp: this.config.damp,
+			debug: this.config.debug,
 			animate: true,
 			canvas: this.canvas
 		})
@@ -40,7 +40,7 @@ export default {
 		this.controller.draw()
 
 		// Listen for mouse move
-		if (this.$config.followMouse) {
+		if (this.config.followMouse) {
 			this.canvas.addEventListener('mousemove', e => {
 				const mouse = {
 					x: e.clientX,
