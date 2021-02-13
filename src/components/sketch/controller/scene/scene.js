@@ -63,6 +63,7 @@ export default class Scene {
 
 		// Draw dots only on debug mode
 		if (debug) {
+			this.ctx.fillText(this.frameCount, 10, 20)
 			// Detection coordinates
 			if (this.mode === 'detection') drawDot(this.ctx, this.coordinates)
 			// Draw mover
@@ -74,12 +75,7 @@ export default class Scene {
 		}
 	}
 
-	post(debug) {
-		// Display current frame
-		if (debug) {
-			this.ctx.fillText(this.frameCount, 10, 20)
-		}
-
+	post() {
 		// Restore context state
 		this.ctx.restore()
 	}

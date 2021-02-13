@@ -15,17 +15,15 @@ export default class Controller {
 		// Retrive container bounds
 		this.bounds = this.calculateBounds()
 
-		// Set canvas dimension
+		// Update and set Canvas Size
 		this.canvas.setAttribute('width', this.bounds.w)
 		this.canvas.setAttribute('height', this.bounds.h)
 		this.canvas.style.width = this.bounds.w + 'px'
 		this.canvas.style.height = this.bounds.h + 'px'
 
-		/*
-		 * --------------------
-		 * Scene setup
-		 * --------------------
-		 */
+		// --------------
+		// Scene setup
+		// --------------
 
 		// Current Scene
 		this.currentScene = 0
@@ -71,7 +69,7 @@ export default class Controller {
 			this.scene.render(this.options.debug)
 
 			// Restore context and draw frameCount
-			this.scene.post(this.options.debug)
+			this.scene.post()
 
 			// Recall draw function
 			window.requestAnimationFrame(() => this.draw())
@@ -88,7 +86,7 @@ export default class Controller {
 		const container = this.canvas.parentNode
 		// Get parent bounds
 		const containerSize = container.getBoundingClientRect()
-		// Create a custom object with some properties
+		// Create a custom object with some useful properties
 		return {
 			x: containerSize.x,
 			y: containerSize.y,
