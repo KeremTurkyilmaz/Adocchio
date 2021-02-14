@@ -15,6 +15,10 @@ export default class Scene {
 			x: this.center.x,
 			y: this.center.y
 		}
+		this.des = {
+			x: 0,
+			y: 0
+		}
 		// Create n random movers
 		this.movers = []
 		for (let i = 0; i < 20; i++) {
@@ -40,6 +44,10 @@ export default class Scene {
 			this.movers.forEach(mover => {
 				mover.update(this.frameCount * 0.0015)
 			})
+		} else {
+			// Interpolation with damping
+			this.coordinates.x += this.des.x * this.damp
+			this.coordinates.y += this.des.y * this.damp
 		}
 	}
 
@@ -88,13 +96,10 @@ export default class Scene {
 
 	set updateCoordinates(coord) {
 		// Calculate new destination
-		const des = {
+		this.des = {
 			x: coord.x - this.coordinates.x,
 			y: coord.y - this.coordinates.y
 		}
-		// Interpolation with damping
-		this.coordinates.x += des.x * this.damp
-		this.coordinates.y += des.y * this.damp
 	}
 }
 
