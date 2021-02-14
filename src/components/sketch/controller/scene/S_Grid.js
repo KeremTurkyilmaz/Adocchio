@@ -10,12 +10,10 @@ export default class S_Grid extends Scene {
 		this.ctx = options.ctx
 		this.bounds = options.bounds
 		this.damp = options.damp
+		this.modulo = options.modulo
 	}
 
 	init() {
-		// Define eye radius
-		this.modulo = 150
-
 		// Calculate a perfect grid based on modulo size and the container bounds
 		this.grid = calculateGrid({
 			modulo: this.modulo,

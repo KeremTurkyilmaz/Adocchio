@@ -11,7 +11,7 @@ import Controller from './controller/controller'
 export default {
 	name: 'Sketch',
 	computed: {
-		config(){
+		config() {
 			return this.$store.getters.config
 		}
 	},
@@ -23,6 +23,7 @@ export default {
 		this.controller = new Controller({
 			damp: this.config.damp,
 			debug: this.config.debug,
+			modulo: this.config.modulo,
 			animate: true,
 			canvas: this.canvas
 		})
