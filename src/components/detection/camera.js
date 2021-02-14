@@ -136,9 +136,6 @@ export default class Camera {
 		this.ctx.beginPath()
 		this.ctx.ellipse(face.center.x, face.center.y, 10, 10, 0, 0, Math.PI * 2)
 		this.ctx.fill()
-		// Draw coordinates
-		// this.ctx.font = '20px Helvetica'
-		// this.ctx.fillText(Math.floor(face.center.x) + ' ' + Math.floor(face.center.y), face.x, face.y - 10)
 		this.ctx.restore()
 	}
 
