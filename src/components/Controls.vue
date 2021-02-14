@@ -11,7 +11,7 @@
       </div>
       <div class="input-row">
         <p>Damp: {{ edit.damp }}</p>
-        <input v-model.number="edit.damp" type="range" min="0" max="1" step="0.05" />
+        <input v-model.number="edit.damp" type="range" min="0.01" max="0.1" step="0.005" />
       </div>
       <div class="input-row">
         <p>TimerInterval: {{ edit.timerInterval }} seconds</p>
