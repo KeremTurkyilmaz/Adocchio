@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Controls v-if="showControls && controller && capture" :controller="controller" :capture="capture" />
+    <Controls v-if="controller && capture" :controller="controller" :capture="capture" />
     <Sketch ref="sketch" />
     <Capture ref="capture" />
   </div>
@@ -19,7 +19,6 @@ export default {
 	},
 	data() {
 		return {
-			showControls: false,
 			controller: null,
 			capture: null
 		}
@@ -27,15 +26,6 @@ export default {
 	mounted() {
 		this.controller = this.$refs.sketch.controller
 		this.capture = this.$refs.capture
-		window.addEventListener('keypress', this.handleKeyPress)
-	},
-	destroyed() {
-		window.removeEventListener('keypress', this.handleKeyPress)
-	},
-	methods: {
-		handleKeyPress(e) {
-			if (e.key == 'd') this.showControls = !this.showControls
-		}
 	}
 }
 </script>
