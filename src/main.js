@@ -8,7 +8,7 @@ Vue.config.productionTip = false
 const defaultConfig = {
 	modulo: 150,
 	damp: 0.09,
-	debug: true,
+	debug: false,
 	detectFaces: true,
 	captureVideo: true,
 	followMouse: false,
