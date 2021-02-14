@@ -8,9 +8,9 @@ Vue.config.productionTip = false
 const defaultConfig = {
 	modulo: 150,
 	damp: 0.85,
-	debug: true,
-	detectFaces: false,
-	captureVideo: false,
+	debug: false,
+	detectFaces: true,
+	captureVideo: true,
 	followMouse: false,
 	flip: true,
 	timerInterval: 5, // Seconds
