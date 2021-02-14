@@ -91,6 +91,10 @@ export const rgba_to_grayscale = (rgba, nrows, ncols) => {
 	return gray
 }
 
-export const secondsToFrames = (s) => {
+export const secondsToFrames = s => {
 	return s * 60
+}
+
+export const clone = obj => {
+	return JSON.parse(JSON.stringify(obj))
 }

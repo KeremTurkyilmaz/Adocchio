@@ -8,16 +8,14 @@ export const store = new Vuex.Store({
 		config: null
 	},
 	getters: {
-		config: state => {
-			return state.config
-		}
+		config: state => state.config
 	},
 	mutations: {
 		initVueApp(state, data) {
 			const localSettings = window.localStorage.getItem('settings')
 			state.config = localSettings ? JSON.parse(localSettings) : data
 		},
-		saveConfig(state, data) {
+		updateConfig(state, data) {
 			state.config = data
 			localStorage.setItem('settings', JSON.stringify(data))
 		},
