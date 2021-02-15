@@ -15,39 +15,27 @@ export default {
 			return this.$store.getters.config
 		}
 	},
-	mounted() {
+	async mounted() {
 		// Canvas reference
 		this.canvas = this.$refs.canvas
 
 		// Create new controller
 		this.controller = new Controller({
-			damp: this.config.damp,
-			debug: this.config.debug,
-			modulo: this.config.modulo,
+			...this.config,
 			animate: true,
 			canvas: this.canvas
 		})
 
-		// Add resize event, fit canvas to the current window size
-		window.addEventListener('resize', () => {
-			this.controller.init()
-			this.controller.draw()
-		})
-
 		// Init the controller
-		this.controller.init()
-
-		// Start drawing
-		this.controller.draw()
+		await this.controller.init()
 
 		// Listen for mouse move
 		if (this.config.followMouse) {
 			this.canvas.addEventListener('mousemove', e => {
-				const mouse = {
+				this.controller.scene.updateCoordinates = {
 					x: e.clientX,
 					y: e.clientY
 				}
-				this.controller.scene.updateCoordinates = mouse
 			})
 		}
 
@@ -65,6 +53,12 @@ export default {
 		Events.$on('lost-detection', () => {
 			if (this.controller.scene.mode === 'idle') return
 			this.controller.scene.setMode = 'idle'
+		})
+
+		// Add resize event, fit canvas to the current window size
+		window.addEventListener('resize', () => {
+			this.controller.init()
+			this.controller.draw()
 		})
 	}
 }

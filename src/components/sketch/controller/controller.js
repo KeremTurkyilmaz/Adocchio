@@ -1,4 +1,5 @@
 import S_Grid from './scene/S_Grid'
+import { loadAsset } from '@/utils'
 
 export default class Controller {
 	constructor(options = {}) {
@@ -8,7 +9,7 @@ export default class Controller {
 		this.animate = options.animate
 	}
 
-	init() {
+	async init() {
 		// Get canvas context
 		this.ctx = this.canvas.getContext('2d')
 
@@ -22,6 +23,19 @@ export default class Controller {
 		this.canvas.style.height = this.bounds.h + 'px'
 
 		// --------------
+		// InitAssets
+		// --------------
+		// Load an'image from assets/sprites Folder
+		// All images must be in PNG
+		// Preserve our Promise All formatting
+		// prettier-ignore
+		this.assets = await Promise.all([
+			loadAsset('eye'), 
+			loadAsset('iris'), 
+			loadAsset('pupil')
+		])
+
+		// --------------
 		// Scene setup
 		// --------------
 
@@ -32,7 +46,8 @@ export default class Controller {
 		this.options = {
 			...this.options,
 			ctx: this.ctx,
-			bounds: this.bounds
+			bounds: this.bounds,
+			assets: this.assets,
 		}
 
 		// List of scenes
@@ -43,6 +58,9 @@ export default class Controller {
 
 		// Init scene
 		this.setScene(this.currentScene)
+
+		// Start drawing
+		this.draw()
 	}
 
 	setScene(index) {

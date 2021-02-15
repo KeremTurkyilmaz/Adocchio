@@ -1,4 +1,4 @@
-import Mover from '../objects/mover'
+ import Mover from '../objects/mover'
 
 export default class Scene {
 	constructor() {}
@@ -21,8 +21,8 @@ export default class Scene {
 		}
 		// Create n random movers
 		this.movers = []
-		for (let i = 0; i < 20; i++) {
-			this.movers.push(new Mover({ id: i }))
+		for (let id = 0; id < 20; id++) {
+			this.movers.push(new Mover({ id }))
 		}
 
 		this.eyesTimeout = null
@@ -60,7 +60,7 @@ export default class Scene {
 			// Eye follow it's own movers
 			if (this.mode === 'idle') {
 				this.movers.forEach(mover => {
-					if (eye.moverId === mover.id) {
+					if (eye.mover === mover.id) {
 						eye.follow(mover.position)
 					}
 				})

@@ -10,6 +10,10 @@
         <input v-model.number="edit.modulo" type="range" min="50" max="400" step="10" />
       </div>
       <div class="input-row">
+        <p>Scale: {{ edit.scale }}</p>
+        <input v-model.number="edit.scale" type="range" min="0" max="1" step="0.05" />
+      </div>
+      <div class="input-row">
         <p>Damp: {{ edit.damp }}</p>
         <input v-model.number="edit.damp" type="range" min="0.01" max="0.1" step="0.005" />
       </div>
@@ -79,6 +83,7 @@ export default {
 	background-color: black;
 	color: white;
 	opacity: 0;
+	z-index: 1000;
 	&.show {
 		display: block;
 		opacity: 1;

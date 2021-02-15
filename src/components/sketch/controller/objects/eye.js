@@ -1,30 +1,27 @@
 import { resize } from '@/utils'
 
-const scale = 0.88
 
 export default class Eye {
 	constructor(options = {}) {
-		// Eyr origin
-		this.origin = options.origin
-
-		// Eye Radius
-		this.radius = options.radius
-
-		// Context
-		this.ctx = options.ctx
-
-		// Eye center
+		this.origin = options.origin // Eye origin
+		this.radius = options.radius // Eye Radius
+		this.ctx = options.ctx // Context
+		this.assets = options.assets // Assets
+		this.mover = options.mover // Mover Reference
+		this.scale = options.scale || 1
 		this.center = {
+			// Eye center
 			x: this.origin.x + this.radius / 2,
 			y: this.origin.y + this.radius / 2
 		}
+		// Assing each sprites
+		this.eye = this.assets.find(p => p.name === 'eye') // Eye asset
+		this.iris = this.assets.find(p => p.name === 'iris') // Iris asset
+		this.pupil = this.assets.find(p => p.name === 'pupil') // Pupil asset
 
-		this.moverId = options.moverId
-
-		// Load all sprites
-		this.eye_open = this.loadImage('sprites', `eye.png`)
-		this.iris = this.loadImage('sprites', `iris.png`)
-		this.pupil = this.loadImage('sprites', `pupil.png`)
+		resize(this.eye.image, this.radius, this.radius)
+		resize(this.iris.image, this.radius, this.radius)
+		resize(this.pupil.image, this.radius, this.radius)
 
 		// Iris and Pupil Radius
 		this.iris_radius = this.radius * 0.7
@@ -33,23 +30,11 @@ export default class Eye {
 		// Function that returns the arcsine (in radians) of a number
 		this.iris_arc = Math.asin(this.iris_radius / this.radius)
 
-		//
+		// Iris
 		this.iris_r = this.radius * Math.cos(this.iris_arc)
 
 		// Pos
 		this.pos = { x: 0, y: 0 }
-	}
-
-	// Load image from assets folder
-	loadImage(folder, file) {
-		const img = new Image()
-		const source = require(`@/assets/${folder}/${file}`)
-		img.onload = () => {
-			resize(img, this.radius, this.radius)
-			this.isLoaded = true
-		}
-		img.setAttribute('src', source)
-		return img
 	}
 
 	dPunti(x0, y0, x1, y1) {
@@ -61,49 +46,41 @@ export default class Eye {
 		this.mouse_rad = this.dPunti(this.center.x, this.center.y, coordinates.x, coordinates.y)
 		this.eye_angle = Math.atan(this.mouse_rad / this.iris_r) * 0.7
 		this.pos.x = this.iris_r * Math.sin(this.eye_angle)
-		// if (this.eye_angle > radians(90) - this.iris_arc) this.eye_angle = radians(90) - this.iris_arc
 	}
 
 	render(debug) {
 		// Eye
 		this.ctx.save()
 		this.ctx.translate(this.center.x, this.center.y)
-		this.ctx.scale(scale, scale)
-		this.ctx.drawImage(this.eye_open, -this.eye_open.width / 2, -this.eye_open.height / 2, this.eye_open.width, this.eye_open.height)
+		this.ctx.scale(this.scale, this.scale)
+		this.ctx.drawImage(this.eye.image, -this.eye.image.width / 2, -this.eye.image.width / 2, this.eye.image.width, this.eye.image.height)
 		this.ctx.restore()
 
 		this.ctx.save()
 		this.ctx.translate(this.center.x, this.center.y)
 		this.ctx.rotate(this.angle)
-		this.ctx.scale(scale*0.8, scale*0.8)
+		this.ctx.scale(this.scale*0.8, this.scale*0.8)
+		this.ctx.translate(this.pos.x, this.pos.y)
 
 		// Iris
-		this.ctx.save()
-		this.ctx.translate(this.pos.x, this.pos.y)
-		this.ctx.drawImage(this.iris, -this.iris_radius / 2, -this.iris_radius / 2, this.iris_radius * Math.cos(this.eye_angle), this.iris_radius)
-		this.ctx.restore()
-
+		this.ctx.drawImage(this.iris.image, -this.iris_radius / 2, -this.iris_radius / 2, this.iris_radius * Math.cos(this.eye_angle), this.iris_radius)
 		// Pupil
-		this.ctx.save()
-		this.ctx.translate(this.pos.x, this.pos.y)
-		this.ctx.drawImage(this.pupil, -this.pupil_radius / 2, -this.pupil_radius / 2, this.pupil_radius * Math.cos(this.eye_angle), this.pupil_radius)
-		this.ctx.restore()
+		this.ctx.drawImage(this.pupil.image, -this.pupil_radius / 2, -this.pupil_radius / 2, this.pupil_radius * Math.cos(this.eye_angle), this.pupil_radius)
+
 		this.ctx.restore()
 
+		// Draw rectangle based on detection coordinates
 		if (debug) {
 			this.ctx.strokeStyle = 'gray'
 			this.ctx.strokeRect(this.origin.x, this.origin.y, this.radius, this.radius)
-
 			this.ctx.beginPath()
 			this.ctx.moveTo(this.origin.x, this.origin.y)
 			this.ctx.lineTo(this.origin.x + this.radius, this.origin.y + this.radius)
 			this.ctx.stroke()
-
 			this.ctx.beginPath()
 			this.ctx.moveTo(this.origin.x, this.origin.y + this.radius)
 			this.ctx.lineTo(this.origin.x + this.radius, this.origin.y)
 			this.ctx.stroke()
-
 			this.ctx.beginPath()
 			this.ctx.ellipse(this.center.x, this.center.y, 20, 20, 0, 0, Math.PI * 2)
 			this.ctx.stroke()

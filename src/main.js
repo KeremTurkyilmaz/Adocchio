@@ -6,9 +6,10 @@ import './assets/styles/main.scss'
 Vue.config.productionTip = false
 
 const defaultConfig = {
+	scale: 0.8,
 	modulo: 150,
 	damp: 0.09,
-	debug: false,
+	debug: true,
 	detectFaces: true,
 	captureVideo: true,
 	followMouse: false,

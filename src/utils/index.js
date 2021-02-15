@@ -98,3 +98,24 @@ export const secondsToFrames = s => {
 export const clone = obj => {
 	return JSON.parse(JSON.stringify(obj))
 }
+
+export const loadAsset = file => {
+	return new Promise(resolve => {
+		const img = new Image()
+		img.onload = () => {
+			resolve({
+				name: file,
+				image: img,
+				bounds: {
+					W: img.width,
+					H: img.height
+				}
+			})
+		}
+		img.onerror = () => {
+			console.log('Loader: error loading image ' + file)
+			resolve(null)
+		}
+		img.src = require(`@/assets/sprites/${file}.png`)
+	})
+}

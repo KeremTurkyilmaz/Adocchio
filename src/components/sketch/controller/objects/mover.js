@@ -6,7 +6,6 @@ export default class Mover {
 			h: window.innerHeight
 		}
 		this.pos = { x: 0, y: 0 }
-
 		this.range = {
 			x: this.bounds.w / 2,
 			y: this.bounds.h / 2

@@ -11,6 +11,8 @@ export default class S_Grid extends Scene {
 		this.bounds = options.bounds
 		this.damp = options.damp
 		this.modulo = options.modulo
+		this.assets = options.assets
+		this.scale = options.scale
 	}
 
 	init() {
@@ -24,20 +26,23 @@ export default class S_Grid extends Scene {
 		for (let j = 0; j < this.grid.rows; j++) {
 			for (let i = 0; i < this.grid.cols; i++) {
 				// Associated mover
-				const moverId = random(0, this.movers.length - 1)
+				const mover = random(0, this.movers.length - 1)
 
+				const options = {
+					scale: this.scale,
+					mover: mover,
+					ctx: this.ctx,
+					radius: this.modulo,
+					assets: this.assets,
+					origin: {
+						x: i * this.modulo + this.grid.pad.x * (i + 1),
+						y: j * this.modulo + this.grid.pad.y * (j + 1)
+					}
+				}
 				// Add eye to the eyes list
 				this.eyes.push(
 					// Create new eye
-					new Eye({
-						moverId,
-						ctx: this.ctx,
-						origin: {
-							x: i * this.modulo + this.grid.pad.x * (i + 1),
-							y: j * this.modulo + this.grid.pad.y * (j + 1)
-						},
-						radius: this.modulo
-					})
+					new Eye(options)
 				)
 			}
 		}
