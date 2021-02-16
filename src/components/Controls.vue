@@ -21,6 +21,14 @@
         <p>TimerInterval: {{ edit.timerInterval }} seconds</p>
         <input v-model.number="edit.timerInterval" type="range" min="1" max="10" step="1" />
       </div>
+      <div class="input-row">
+        <p>Min: {{ edit.min }}</p>
+        <input v-model.number="edit.min" type="range" min="10" max="300" step="10" />
+      </div>
+      <div class="input-row">
+        <p>Max: {{ edit.max }}</p>
+        <input v-model.number="edit.max" type="range" min="200" max="600" step="10" />
+      </div>
     </div>
     <div class="bottom">
       <button @click="deleteSettings">Delete Settings</button>
