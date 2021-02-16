@@ -15,13 +15,17 @@ export default class S_Grid extends Scene {
 		this.scale = options.scale
 	}
 
-	init() {
+	init(randomSize) {
+
+		const dim = randomSize || this.modulo
+
 		// Calculate a perfect grid based on modulo size and the container bounds
 		this.grid = calculateGrid({
-			modulo: this.modulo,
+			modulo: dim,
 			bounds: this.bounds
 		})
 
+		let id = 0;
 		// Loop trought rows and columns
 		for (let j = 0; j < this.grid.rows; j++) {
 			for (let i = 0; i < this.grid.cols; i++) {
@@ -32,18 +36,22 @@ export default class S_Grid extends Scene {
 					scale: this.scale,
 					mover: mover,
 					ctx: this.ctx,
-					radius: this.modulo,
+					radius: dim,
 					assets: this.assets,
 					origin: {
-						x: i * this.modulo + this.grid.pad.x * (i + 1),
-						y: j * this.modulo + this.grid.pad.y * (j + 1)
+						x: i * dim + this.grid.pad.x * (i + 1),
+						y: j * dim + this.grid.pad.y * (j + 1)
 					}
 				}
+
+				setTimeout(() => {
+					this.eyes.push(
+						// Create new eye
+						new Eye(options)
+					)
+				}, id*50)
+				id++
 				// Add eye to the eyes list
-				this.eyes.push(
-					// Create new eye
-					new Eye(options)
-				)
 			}
 		}
 	}

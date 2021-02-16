@@ -1,5 +1,6 @@
 import S_Grid from './scene/S_Grid'
-import { loadAsset } from '@/utils'
+import S_Random from './scene/S_Random'
+import { loadAsset, random } from '@/utils'
 
 export default class Controller {
 	constructor(options = {}) {
@@ -47,7 +48,7 @@ export default class Controller {
 			...this.options,
 			ctx: this.ctx,
 			bounds: this.bounds,
-			assets: this.assets,
+			assets: this.assets
 		}
 
 		// List of scenes
@@ -55,6 +56,7 @@ export default class Controller {
 
 		// Let's add some scene to the scenes list
 		this.scenes.push(new S_Grid(this.options))
+		// this.scenes.push(new S_Random(this.options))
 
 		// Init scene
 		this.setScene(this.currentScene)

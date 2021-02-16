@@ -1,4 +1,5 @@
- import Mover from '../objects/mover'
+import Mover from '../objects/mover'
+import { random } from '@/utils'
 
 export default class Scene {
 	constructor() {}
@@ -24,8 +25,6 @@ export default class Scene {
 		for (let id = 0; id < 20; id++) {
 			this.movers.push(new Mover({ id }))
 		}
-
-		this.eyesTimeout = null
 	}
 
 	pre() {
@@ -33,6 +32,41 @@ export default class Scene {
 		// Save context state
 		this.ctx.clearRect(0, 0, this.bounds.w, this.bounds.h)
 		this.ctx.save()
+	}
+
+	startInterval() {
+		this.myInterval = setInterval(() => {
+			this.redrawGrid()
+		}, 60000)
+	}
+
+	stopInterval() {
+		clearInterval(this.myInterval)
+	}
+
+	redrawGrid() {
+		this.removeItems().then(() => {
+			setTimeout(() => {
+				const dim = random(this.options.min, this.options.max)
+				console.log('Dim Random', dim)
+				this.init(dim)
+			}, 2000)
+		})
+	}
+
+	removeItems() {
+		const promises = []
+		for (let i = 0; i < this.eyes.length; i++) {
+			promises.push(
+				new Promise(resolve => {
+					setTimeout(() => {
+						this.eyes.pop()
+						resolve()
+					}, 50 * i)
+				})
+			)
+		}
+		return Promise.all(promises)
 	}
 
 	update() {
@@ -91,6 +125,8 @@ export default class Scene {
 	set setMode(mode) {
 		// Set scene mode -> 'detection' or 'idle'
 		console.log('Update scene mode ' + mode)
+		if (mode === 'idle') this.startInterval()
+		if (mode === 'detection') this.stopInterval()
 		this.mode = mode
 	}
 

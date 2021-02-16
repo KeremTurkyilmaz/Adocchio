@@ -22,7 +22,7 @@ export default class Eye {
 		resize(this.eye.image, this.radius, this.radius)
 		resize(this.iris.image, this.radius, this.radius)
 		resize(this.pupil.image, this.radius, this.radius)
-
+		
 		// Iris and Pupil Radius
 		this.iris_radius = this.radius * 0.7
 		this.pupil_radius = this.radius * 0.4
