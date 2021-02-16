@@ -1,5 +1,5 @@
 import S_Grid from './scene/S_Grid'
-import S_Random from './scene/S_Random'
+// import S_Random from './scene/S_Random'
 import { loadAsset, random } from '@/utils'
 
 export default class Controller {
