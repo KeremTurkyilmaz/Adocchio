@@ -1,5 +1,6 @@
 import Mover from '../objects/mover'
-import { random } from '@/utils'
+
+const matrix = [120, 200, 250, 160, 110, 200, 140, 220]
 
 export default class Scene {
 	constructor() {}
@@ -25,6 +26,7 @@ export default class Scene {
 		for (let id = 0; id < 20; id++) {
 			this.movers.push(new Mover({ id }))
 		}
+		this.currentMatrix = 0
 	}
 
 	pre() {
@@ -35,22 +37,23 @@ export default class Scene {
 	}
 
 	startInterval() {
-		this.myInterval = setInterval(() => {
+		this.matrixInterval = setInterval(() => {
 			this.redrawGrid()
 		}, 60000)
 	}
 
 	stopInterval() {
-		clearInterval(this.myInterval)
+		clearInterval(this.matrixInterval)
 	}
 
 	redrawGrid() {
 		this.removeItems().then(() => {
 			setTimeout(() => {
-				const dim = random(this.options.min, this.options.max)
-				console.log('Dim Random', dim)
-				this.init(dim)
-			}, 2000)
+				this.currentMatrix = (this.currentMatrix + 1) % matrix.length
+				const modulo = matrix[this.currentMatrix]
+				console.log('Current Matrix', modulo)
+				this.init(modulo)
+			}, 1000)
 		})
 	}
 
