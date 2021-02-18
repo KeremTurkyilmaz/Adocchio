@@ -7,7 +7,7 @@ const defaultConfig = {
 	scale: 0.8,
 	min: 100, 
 	max: 300,
-	modulo: 150,
+	modulo: 120,
 	damp: 0.09,
 	debug: false,
 	detectFaces: true,

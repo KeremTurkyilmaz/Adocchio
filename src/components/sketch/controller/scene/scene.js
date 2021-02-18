@@ -1,6 +1,6 @@
 import Mover from '../objects/mover'
 
-const matrix = [120, 200, 250, 160, 110, 200, 140, 220]
+const matrix = [120, 180, 200, 140, 220]
 
 export default class Scene {
 	constructor() {}
