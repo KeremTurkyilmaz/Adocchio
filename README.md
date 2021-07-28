@@ -1,22 +1,20 @@
 # Adocchio
+Ai tempi di tracking, detection e indiscreti sguardi digitali, Adocchio è un’installazione interattiva che al contrario invita il visitatore a conquistare l'attenzione della macchina. Questo digital gaze è di fatto un muro di occhi artificiali, che mostra però caratteristiche inaspettatamente umane: è indisciplinato, si distrae facilmente, si stanca, si appisola. Sta al visitatore destarlo, intrattenerlo e farsi seguire nello spazio.
 
-## Description
-Ai tempi di tracking, detection e indiscreti sguardi digitali, Adocchio è un’installazione interattiva che al contrario invita il visitatore a conquistare l'attenzione della macchina. Questo digital gaze è di fatto un muro di occhi artificiali, che mostra però caratteristiche inaspettatamente umane: è indisciplinato, si distrae facilmente, si stanca, si appisola. Sta al visitatore destarlo, intrattenerlo e farsi seguire nello spazio. 
+## Autori
+[`Marta Monge - Illustrator`](https://martamonge.me/)
+[`Kerem Türkyilmaz - Coder`](https://www.kerem.ch/)
 
-## Authors
+## Specifiche 
 ```
-Marta Monge         - Illustrator
-Kerem Türkyilmaz    - Coder 
-```
+Last release: 02/02/2021
 
-## Global
-```
-Last release: 04/11/2020
+Tested on Chrome v91.0.4472.164
 
-Stable version tested with: 
+Stable version tested with:
 Vue     - 2.6.12
-Node    - v14.11.0
-npm     - v6.14.8     
+Node    - v14.12.0
+NPM     - v6.14.4
 ```
 
 ## Project setup
