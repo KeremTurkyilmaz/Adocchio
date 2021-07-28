@@ -10,29 +10,30 @@
   },
   "resolutions": {
     "minimist": "1.2.3",
-    "mkdir": "0.5.3"
+    "mkdir": "0.5.3",
+    "trim-newlines": "4.0.2",
+    "glob-parent": "5.1.2"
   },
   "dependencies": {
-    "@vue/composition-api": "^1.0.0-beta.14",
-    "core-js": "^3.6.5",
-    "facedetector": "^1.0.1",
-    "vue": "^2.6.12",
-    "vue-router": "^3.4.5",
+    "core-js": "^3.15.2",
+    "vue": "^2.6.14",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.6",
-    "@vue/cli-plugin-eslint": "^4.5.6",
-    "@vue/cli-plugin-router": "^4.5.6",
-    "@vue/cli-plugin-vuex": "^4.5.6",
-    "@vue/cli-service": "^4.5.6",
+    "@vue/cli-plugin-babel": "^4.5.13",
+    "@vue/cli-plugin-eslint": "^4.5.13",
+    "@vue/cli-plugin-router": "^4.5.13",
+    "@vue/cli-plugin-vuex": "^4.5.13",
+    "@vue/cli-service": "^4.5.13",
     "babel-eslint": "^10.1.0",
     "eslint": "^5.16.0",
-    "eslint-config-prettier": "^6.13.0",
+    "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-vue": "^5.0.0",
+    "glob-parent": "^5.1.2",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.12"
+    "trim-newlines": "^4.0.2",
+    "vue-template-compiler": "^2.6.14"
   },
   "browserslist": [
     "> 1%",
