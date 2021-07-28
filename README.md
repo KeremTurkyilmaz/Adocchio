@@ -17,7 +17,7 @@ Node    - v14.12.0
 NPM     - v6.14.4
 ```
 
-## Project setup
+## Setup
 
 ```
 # Clone
