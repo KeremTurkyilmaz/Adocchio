@@ -4,12 +4,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const defaultConfig = {
+	debug: false,
 	scale: 0.8,
-	min: 100, 
+	min: 100,
 	max: 300,
 	modulo: 120,
 	damp: 0.09,
-	debug: false,
 	detectFaces: true,
 	captureVideo: true,
 	followMouse: false,

@@ -1,10 +1,6 @@
 <template>
   <div v-if="edit" class="controls" :class="{ show }">
     <div class="middle">
-      <div class="input-row special">
-        <p>Debug Mode:</p>
-        <input v-model.number="edit.debug" type="checkbox" />
-      </div>
       <div class="input-row">
         <p>Modulo: {{ edit.modulo }}</p>
         <input v-model.number="edit.modulo" type="range" min="50" max="400" step="10" />
@@ -65,8 +61,12 @@ export default {
 	},
 	mounted() {
 		this.edit = clone(this.config)
+		this.show = this.config.debug
 		window.addEventListener('keypress', e => {
-			if (e.key == 'd') this.show = !this.show
+			if (e.key == 'd') {
+				if (!this.config.debug) return
+				this.show = !this.show
+			}
 		})
 	},
 	methods: {
