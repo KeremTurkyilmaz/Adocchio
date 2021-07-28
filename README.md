@@ -12,7 +12,7 @@ Last release: 02/02/2021
 Tested on Chrome v91.0.4472.164
 
 Stable version tested with:
-Vue     - 2.6.12
+Vue     - v2.6.14
 Node    - v14.12.0
 NPM     - v6.14.4
 ```
