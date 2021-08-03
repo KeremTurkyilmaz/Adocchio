@@ -3,6 +3,7 @@ Ai tempi di tracking, detection e indiscreti sguardi digitali, Adocchio è un’
 
 In these times of tracking, detection and indiscreet digital tools, Adocchio is an interactive installation that goes against the flow by daring visitors to grab machines' attention. Its digital gaze looks out from a wall of artificial eyes, but acts unexpectedly human: it's unruly, gets distracted, tires easily, and dozes off. It's up to visitors to wake it up, entertain it, and get it to follow them across the space.
 
+![](docs/adocchio.gif)
 
 ## Autori
 [`Marta Monge - Illustrator`](https://martamonge.me/)
