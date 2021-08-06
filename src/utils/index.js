@@ -55,7 +55,7 @@ export const calculateGrid = (options = {}) => {
 	const offX = bounds.w - dim.x
 	const offY = bounds.h - dim.y
 
-	// Calcualte the padding between each column and row
+	// Calculate the padding between each column and row
 	const pad = {
 		x: offX / (cols + 1),
 		y: offY / (rows + 1)
