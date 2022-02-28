@@ -1,16 +1,16 @@
 <template>
-  <div class="capture" :class="{ debug: config.debug }">
-    <video ref="input" autoplay muted playsinline></video>
-    <div class="controls">
-      <p :class="{ paused: pausedVideo }" @click="toggleCamera()">
-        {{ pausedVideo ? 'Start Camera' : 'Stop Camera' }}
-      </p>
-      <p :class="{ paused: pausedDetection }" @click="toggleDetection()">
-        {{ pausedDetection ? 'Start Detection' : 'Stop Detection' }}
-      </p>
-    </div>
-    <canvas ref="canvas"></canvas>
-  </div>
+	<div class="capture" :class="{ debug: config.debug }">
+		<video ref="input" autoplay muted playsinline></video>
+		<div class="controls">
+			<p :class="{ paused: pausedVideo }" @click="toggleCamera">
+				{{ pausedVideo ? 'Start Camera' : 'Stop Camera' }}
+			</p>
+			<p :class="{ paused: pausedDetection }" @click="toggleDetection">
+				{{ pausedDetection ? 'Start Detection' : 'Stop Detection' }}
+			</p>
+		</div>
+		<canvas ref="canvas"></canvas>
+	</div>
 </template>
 
 <script>
