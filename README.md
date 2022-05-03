@@ -25,7 +25,7 @@ NPM     - v6.14.4
 
 ```
 # Clone
-git clone git@github.com:KeremTurkyilmaz/Adocchio.git
+git clone git@github.com:KeremTurkyilmaz/adocchio.git
 
 # Move into cloned repo
 cd Adocchio/
